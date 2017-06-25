@@ -1,0 +1,71 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/reimu/DATA/AS/Projects/Whattoeat/app/src/main/AndroidManifest.xml:1:1-15:12
+	package
+		ADDED from /home/reimu/DATA/AS/Projects/Whattoeat/app/src/main/AndroidManifest.xml:3:5-35
+		INJECTED from /home/reimu/DATA/AS/Projects/Whattoeat/app/src/main/AndroidManifest.xml
+		INJECTED from /home/reimu/DATA/AS/Projects/Whattoeat/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /home/reimu/DATA/AS/Projects/Whattoeat/app/src/main/AndroidManifest.xml
+		INJECTED from /home/reimu/DATA/AS/Projects/Whattoeat/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/reimu/DATA/AS/Projects/Whattoeat/app/src/main/AndroidManifest.xml:1:11-69
+	android:versionCode
+		INJECTED from /home/reimu/DATA/AS/Projects/Whattoeat/app/src/main/AndroidManifest.xml
+		INJECTED from /home/reimu/DATA/AS/Projects/Whattoeat/app/src/main/AndroidManifest.xml
+application
+ADDED from /home/reimu/DATA/AS/Projects/Whattoeat/app/src/main/AndroidManifest.xml:5:5-13:19
+MERGED from [com.android.support:appcompat-v7:26.0.0-alpha1] /home/reimu/.android/build-cache/055c6faf3a910435c44c73d1e0e047606e498d9d/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-v4:26.0.0-alpha1] /home/reimu/.android/build-cache/8b39657c23d7400492130cecdb7eb413eeba030b/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-media-compat:26.0.0-alpha1] /home/reimu/.android/build-cache/35ec092c3bc67837ce7f0831f448c82120b0e915/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-fragment:26.0.0-alpha1] /home/reimu/.android/build-cache/2bf58d6c8dd30170d7fad49fe4efe6653e6ef129/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-ui:26.0.0-alpha1] /home/reimu/.android/build-cache/5e74a187ec593687865379c0cb35639077113ca6/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] /home/reimu/.android/build-cache/6a69e4dead4cdd3921533eba283ed071ae45117f/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:animated-vector-drawable:26.0.0-alpha1] /home/reimu/.android/build-cache/e59724ced1c8ec1245f0f6bb4b1e0c271cffce08/output/AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-vector-drawable:26.0.0-alpha1] /home/reimu/.android/build-cache/a8c91b41f5ace8bd45549d09a7cf366a71d6b169/output/AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-compat:26.0.0-alpha1] /home/reimu/.android/build-cache/c74735d9ef18287913ebcb096e9a02625852a14f/output/AndroidManifest.xml:29:5-20
+	android:label
+		ADDED from /home/reimu/DATA/AS/Projects/Whattoeat/app/src/main/AndroidManifest.xml:8:9-41
+	android:supportsRtl
+		ADDED from /home/reimu/DATA/AS/Projects/Whattoeat/app/src/main/AndroidManifest.xml:10:9-35
+	android:roundIcon
+		ADDED from /home/reimu/DATA/AS/Projects/Whattoeat/app/src/main/AndroidManifest.xml:9:9-54
+	android:allowBackup
+		ADDED from /home/reimu/DATA/AS/Projects/Whattoeat/app/src/main/AndroidManifest.xml:6:9-35
+	android:icon
+		ADDED from /home/reimu/DATA/AS/Projects/Whattoeat/app/src/main/AndroidManifest.xml:7:9-43
+	android:theme
+		ADDED from /home/reimu/DATA/AS/Projects/Whattoeat/app/src/main/AndroidManifest.xml:11:9-40
+uses-sdk
+INJECTED from /home/reimu/DATA/AS/Projects/Whattoeat/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support:appcompat-v7:26.0.0-alpha1] /home/reimu/.android/build-cache/055c6faf3a910435c44c73d1e0e047606e498d9d/output/AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:support-v4:26.0.0-alpha1] /home/reimu/.android/build-cache/8b39657c23d7400492130cecdb7eb413eeba030b/output/AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-media-compat:26.0.0-alpha1] /home/reimu/.android/build-cache/35ec092c3bc67837ce7f0831f448c82120b0e915/output/AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-fragment:26.0.0-alpha1] /home/reimu/.android/build-cache/2bf58d6c8dd30170d7fad49fe4efe6653e6ef129/output/AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-core-ui:26.0.0-alpha1] /home/reimu/.android/build-cache/5e74a187ec593687865379c0cb35639077113ca6/output/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] /home/reimu/.android/build-cache/6a69e4dead4cdd3921533eba283ed071ae45117f/output/AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:animated-vector-drawable:26.0.0-alpha1] /home/reimu/.android/build-cache/e59724ced1c8ec1245f0f6bb4b1e0c271cffce08/output/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:26.0.0-alpha1] /home/reimu/.android/build-cache/a8c91b41f5ace8bd45549d09a7cf366a71d6b169/output/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:26.0.0-alpha1] /home/reimu/.android/build-cache/c74735d9ef18287913ebcb096e9a02625852a14f/output/AndroidManifest.xml:21:5-23:58
+	tools:overrideLibrary
+		ADDED from [com.android.support:appcompat-v7:26.0.0-alpha1] /home/reimu/.android/build-cache/055c6faf3a910435c44c73d1e0e047606e498d9d/output/AndroidManifest.xml:23:9-75
+	android:targetSdkVersion
+		INJECTED from /home/reimu/DATA/AS/Projects/Whattoeat/app/src/main/AndroidManifest.xml
+		INJECTED from /home/reimu/DATA/AS/Projects/Whattoeat/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/reimu/DATA/AS/Projects/Whattoeat/app/src/main/AndroidManifest.xml
+		INJECTED from /home/reimu/DATA/AS/Projects/Whattoeat/app/src/main/AndroidManifest.xml
+meta-data#android.support.VERSION
+ADDED from [com.android.support:appcompat-v7:26.0.0-alpha1] /home/reimu/.android/build-cache/055c6faf3a910435c44c73d1e0e047606e498d9d/output/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-v4:26.0.0-alpha1] /home/reimu/.android/build-cache/8b39657c23d7400492130cecdb7eb413eeba030b/output/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-media-compat:26.0.0-alpha1] /home/reimu/.android/build-cache/35ec092c3bc67837ce7f0831f448c82120b0e915/output/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-fragment:26.0.0-alpha1] /home/reimu/.android/build-cache/2bf58d6c8dd30170d7fad49fe4efe6653e6ef129/output/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-core-ui:26.0.0-alpha1] /home/reimu/.android/build-cache/5e74a187ec593687865379c0cb35639077113ca6/output/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] /home/reimu/.android/build-cache/6a69e4dead4cdd3921533eba283ed071ae45117f/output/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:animated-vector-drawable:26.0.0-alpha1] /home/reimu/.android/build-cache/e59724ced1c8ec1245f0f6bb4b1e0c271cffce08/output/AndroidManifest.xml:22:5-24:41
+MERGED from [com.android.support:support-vector-drawable:26.0.0-alpha1] /home/reimu/.android/build-cache/a8c91b41f5ace8bd45549d09a7cf366a71d6b169/output/AndroidManifest.xml:22:5-24:41
+MERGED from [com.android.support:support-compat:26.0.0-alpha1] /home/reimu/.android/build-cache/c74735d9ef18287913ebcb096e9a02625852a14f/output/AndroidManifest.xml:25:5-27:41
+	android:value
+		ADDED from [com.android.support:appcompat-v7:26.0.0-alpha1] /home/reimu/.android/build-cache/055c6faf3a910435c44c73d1e0e047606e498d9d/output/AndroidManifest.xml:27:9-38
+	android:name
+		ADDED from [com.android.support:appcompat-v7:26.0.0-alpha1] /home/reimu/.android/build-cache/055c6faf3a910435c44c73d1e0e047606e498d9d/output/AndroidManifest.xml:26:9-47
