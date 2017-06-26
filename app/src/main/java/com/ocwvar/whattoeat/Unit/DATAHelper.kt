@@ -1,6 +1,9 @@
 package com.ocwvar.whattoeat.Unit
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Environment
+import android.preference.PreferenceManager
 import android.text.TextUtils
 import android.util.Log
 import com.google.gson.Gson
@@ -18,41 +21,64 @@ import kotlin.reflect.KProperty
  * File Location com.ocwvar.whattoeat.Unit
  * This file use to :   菜单数据控制器
  */
-class MenuHelper {
+class DATAHelper(appContext: Context) {
 
     //数据处理器
-    private val decoder: JsonDecoder = JsonDecoder()
-
-    //菜单数据容器
-    private val menus: ArrayList<Menu> = ArrayList()
-
-    init {
-        //初始化时加载所有菜单对象
-        menus.addAll(decoder.loadAllMenus())
-    }
+    private val jsonDecoder: JsonDecoder = JsonDecoder()
+    //Sp处理器
+    private val spDecoder: SpDecoder = SpDecoder(appContext)
 
     /**
-     * 重新读取所有菜单对象
+     * 加载所有数据：
+     * 所有的菜单对象
+     * 菜单对象的随机数量
+     * 已启用的列表
      */
-    fun reload() {
-        menus.clear()
-        menus.addAll(decoder.loadAllMenus())
+    fun initData() {
+        DATA.menus.clear()
+        DATA.menus.addAll(jsonDecoder.loadAllMenus())
+        DATA.counts.clear()
+        DATA.counts.putAll(spDecoder.loadAllCounts())
+        DATA.enableList.clear()
+        DATA.enableList.addAll(spDecoder.loadEnableList())
     }
 
     /**
-     * @return  所有菜单对象
-     */
-    fun menus(): ArrayList<Menu> {
-        return this.menus
-    }
-
-    /**
-     * @see JsonDecoder.saveMenu
-     * @param   menu    要储存的菜单对象
+     * 储存菜单数据对象为文件对象，此操作会替换现有相同名称的菜单对象
      * @return  执行结果
      */
-    fun saveMenu(menu: Menu): Boolean {
-        return decoder.saveMenu(menu)
+    fun saveMenu(menu: Menu): Boolean = jsonDecoder.saveMenu(menu)
+
+    /**
+     * 储存菜单的随机数量
+     * @param   menuTitle  菜单名称
+     * @param   count   随机数量
+     */
+    fun saveCount(menuTitle: String, count: Int): Boolean = spDecoder.saveCount(menuTitle, count)
+
+    /**
+     * 更新已启用菜单列表数据到SP中
+     */
+    fun updateEnableList(): Boolean = spDecoder.saveEnableList()
+
+    /**
+     * 更新菜单的启动状态
+     * @param   menuTitle   菜单名称
+     * @param   enable   是否启用
+     * @return  执行结果
+     */
+    fun updateEnableList(menuTitle: String, enable: Boolean): Boolean {
+        if (enable && !DATA.indexEnable(menuTitle)) {
+            //启用菜单
+            DATA.enableList.add(menuTitle)
+            return spDecoder.saveEnableList()
+        } else if (!enable && DATA.indexEnable(menuTitle)) {
+            //不启用菜单
+            DATA.enableList.remove(menuTitle)
+            return spDecoder.saveEnableList()
+        } else {
+            return false
+        }
     }
 
     /**
@@ -158,6 +184,62 @@ class MenuHelper {
                 return false
             }
         }
+    }
+
+    /**
+     * sharePreference数据解析类
+     */
+    private inner class SpDecoder(val appContext: Context) {
+
+        //启动列表SP储存键值名
+        private val ENABLED_LIST_KEY: String = "enabled_list"
+
+        /**
+         * 获取所有菜单的随机数量,此方法必须调用在 JsonDecoder.loadAllMenus 方法之后，不然无法获取数据
+         * @see JsonDecoder.loadAllMenus
+         */
+        fun loadAllCounts(): HashMap<String, Int> {
+            val result: HashMap<String, Int> = HashMap()
+            val sp: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(appContext)
+            for (menu in DATA.menus) {
+                result.put(menu.title, sp.getInt(menu.title, 0))
+            }
+            return result
+        }
+
+        /**
+         * 获取启动菜单信息
+         */
+        fun loadEnableList(): ArrayList<String> {
+            val result: ArrayList<String> = ArrayList()
+            val sp: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(appContext)
+            val stringSet: Iterator<String>? = sp.getStringSet(ENABLED_LIST_KEY, null).iterator()
+            //如果获取不到启动列表，则直接返回空列表
+            stringSet ?: return result
+            //将数据存入结果列表
+            stringSet.forEach { result.add(it) }
+            return result
+        }
+
+        /**
+         * 储存启动菜单信息
+         */
+        fun saveEnableList(): Boolean {
+            val edit: SharedPreferences.Editor = PreferenceManager.getDefaultSharedPreferences(appContext).edit()
+            val stringSet: Set<String> = DATA.enableList.toSet()
+            return edit.remove(ENABLED_LIST_KEY).putStringSet(ENABLED_LIST_KEY, stringSet).commit()
+        }
+
+        /**
+         * 储存菜单的随机数量
+         * @param   menuTitle  菜单名称
+         * @param   count   随机数量
+         */
+        fun saveCount(menuTitle: String, count: Int): Boolean {
+            val edit: SharedPreferences.Editor = PreferenceManager.getDefaultSharedPreferences(appContext).edit()
+            return edit.putInt(menuTitle, count).commit()
+        }
+
     }
 
 }

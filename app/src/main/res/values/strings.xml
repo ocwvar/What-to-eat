@@ -1,3 +1,14 @@
 <resources>
+    <!--APP名称-->
     <string name="app_name">What2Eat</string>
+
+    <!--主界面Option菜单-->
+    <string name="menu_main_menus">菜单管理</string>
+    <string name="menu_main_random">随机控制器</string>
+
+    <!--Menu项目的文字-->
+    <string name="item_menu_random">随机数量</string>
+    <string name="item_menu_enabled">已启用</string>
+    <string name="item_menu_disabled">未启用</string>
+
 </resources>
