@@ -23,7 +23,7 @@ object DATA {
      * @param   menuTitle   菜单名称
      * @return  随机数量，如果获取失败则返回 0
      */
-    fun indexCount(menuTitle: String): Int = counts[menuTitle] ?: 0
+    fun indexRandomCount(menuTitle: String): Int = counts[menuTitle] ?: 0
 
     /**
      * 获取菜单是否已经启用
@@ -31,5 +31,25 @@ object DATA {
      * @return  是否启用
      */
     fun indexEnable(menuTitle: String): Boolean = enableList.indexOf(menuTitle) != -1
+
+    /**
+     * 通过菜单名称查询菜单的位置
+     * @param menuTitle 菜单名称
+     * @return  菜单位置
+     */
+    fun indexMenuByTitle(menuTitle: String): Int = (0..menus.size).firstOrNull { menus[it].title.equals(menuTitle) } ?: -1
+
+    /**
+     * @return  已启用的菜单列表
+     */
+    fun enabledMenus(): ArrayList<Menu> {
+        val result: ArrayList<Menu> = ArrayList()
+        menus.forEach {
+            if (indexEnable(it.title)) {
+                result.add(it)
+            }
+        }
+        return result
+    }
 
 }

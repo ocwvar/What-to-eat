@@ -47,7 +47,54 @@ class DATAHelper(appContext: Context) {
      * 储存菜单数据对象为文件对象，此操作会替换现有相同名称的菜单对象
      * @return  执行结果
      */
-    fun saveMenu(menu: Menu): Boolean = jsonDecoder.saveMenu(menu)
+    fun saveMenu(menu: Menu): Boolean {
+        if (jsonDecoder.saveMenu(menu)) {
+            //查找原本菜单位置
+            val position: Int = DATA.indexMenuByTitle(menu.title)
+            if (position != -1) {
+                //如果有原有的菜单位置，则直接替换数据
+                DATA.menus[position] = menu
+            } else {
+                //新数据直接添加
+                DATA.menus.add(menu)
+            }
+        }
+        return false
+    }
+
+    /**
+     * 移除菜单对象
+     * @param   menu    菜单对象
+     * @return  执行结果
+     */
+    fun removeMenu(menu: Menu): Boolean {
+        //获取菜单文件
+        val menuFile: File = File(jsonDecoder.dataFolder + menu.title + ".menu")
+        if (menuFile.exists() && menuFile.delete()) {
+            //成功删除菜单文件后继续删除数据列表
+            return DATA.menus.remove(menu)
+        }
+        return false
+    }
+
+    /**
+     * 移除菜单对象
+     * @param   menuTitle    菜单标题
+     * @return  执行结果
+     */
+    fun removeMenu(menuTitle: String): Boolean {
+        //获取菜单文件
+        val menuFile: File = File(jsonDecoder.dataFolder + menuTitle + ".menu")
+        if (menuFile.exists() && menuFile.delete()) {
+            //成功删除菜单文件后继续删除数据列表
+            val position: Int = DATA.menus.indexOfLast { it.title.equals(menuTitle) }
+            if (position != -1) {
+                return DATA.menus.removeAt(position) != null
+            }
+            return false
+        }
+        return false
+    }
 
     /**
      * 储存菜单的随机数量
@@ -87,7 +134,7 @@ class DATAHelper(appContext: Context) {
     private class JsonDecoder {
 
         //Json数据储存目录
-        private val dataFolder: String = Environment.getExternalStorageDirectory().path + "/What2Eat/"
+        val dataFolder: String = Environment.getExternalStorageDirectory().path + "/What2Eat/"
         //目录的可用性标记
         private var isReadable: Boolean by object : Any() {
             operator fun getValue(thisRef: Any?, property: KProperty<*>): Boolean {

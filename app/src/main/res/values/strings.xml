@@ -2,6 +2,9 @@
     <!--APP名称-->
     <string name="app_name">What2Eat</string>
 
+    <string name="simple_done">确定</string>
+    <string name="simple_cancel">取消</string>
+
     <!--主界面Option菜单-->
     <string name="menu_main_menus">菜单管理</string>
     <string name="menu_main_random">随机控制器</string>
@@ -10,5 +13,21 @@
     <string name="item_menu_random">随机数量</string>
     <string name="item_menu_enabled">已启用</string>
     <string name="item_menu_disabled">未启用</string>
+
+    <!--Menu编辑页面文字-->
+    <string name="menu_edit_ERROR_data">数据错误，无法进行编辑或创建</string>
+    <string name="menu_edit_ERROR_menu_existed">已存在相同的菜单</string>
+    <string name="menu_edit_ERROR_menu_name">菜单名称为空或包含不可用字符</string>
+    <string name="menu_edit_ERROR_menu_save">数据存储失败，请检查储存容量和应用权限</string>
+    <string name="menu_edit_ERROR_menu_create_no_foods">食品列表为空，数据不进行保存</string>
+    <string name="menu_edit_INFO_menu_save_no_foods">食品列表为空，取消菜单创建</string>
+    <string name="menu_edit_INFO_menu_saved">已储存菜单数据</string>
+    <string name="menu_edit_hint_title">输入菜单标题 (必填)</string>
+    <string name="menu_edit_hint_message">输入菜单简介</string>
+    <string name="menu_edit_dialog_food_edit_title">食品数据</string>
+    <string name="menu_edit_dialog_food_edit_hint_title">名称 (必填)</string>
+    <string name="menu_edit_dialog_food_edit_hint_message">简介</string>
+    <string name="menu_edit_dialog_exit_save">更新数据</string>
+    <string name="menu_edit_dialog_exit_unSave">不更新</string>
 
 </resources>
