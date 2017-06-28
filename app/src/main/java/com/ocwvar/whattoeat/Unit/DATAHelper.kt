@@ -58,6 +58,7 @@ class DATAHelper(appContext: Context) {
                 //新数据直接添加
                 DATA.menus.add(menu)
             }
+            return true
         }
         return false
     }
@@ -138,7 +139,8 @@ class DATAHelper(appContext: Context) {
         //目录的可用性标记
         private var isReadable: Boolean by object : Any() {
             operator fun getValue(thisRef: Any?, property: KProperty<*>): Boolean {
-                return File(dataFolder).canWrite()
+                val folder: File = File(dataFolder)
+                return (folder.exists() && folder.canWrite()) || (!folder.exists() && folder.mkdirs())
             }
 
             operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Boolean) {}
@@ -153,10 +155,14 @@ class DATAHelper(appContext: Context) {
                 val inputStream: FileInputStream = FileInputStream(file)
                 val outputStream: ByteArrayOutputStream = ByteArrayOutputStream()
                 var buffer: ByteArray = ByteArray(128)
-                var length: Int = 0
-                while (length != -1) {
+                var length: Int
+                while (true) {
                     length = inputStream.read(buffer)
-                    outputStream.write(buffer, 0, length)
+                    if (length != -1) {
+                        outputStream.write(buffer, 0, length)
+                    } else {
+                        break
+                    }
                 }
                 outputStream.flush()
                 outputStream.close()
@@ -260,7 +266,7 @@ class DATAHelper(appContext: Context) {
         fun loadEnableList(): ArrayList<String> {
             val result: ArrayList<String> = ArrayList()
             val sp: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(appContext)
-            val stringSet: Iterator<String>? = sp.getStringSet(ENABLED_LIST_KEY, null).iterator()
+            val stringSet: Iterator<String>? = sp.getStringSet(ENABLED_LIST_KEY, null)?.iterator()
             //如果获取不到启动列表，则直接返回空列表
             stringSet ?: return result
             //将数据存入结果列表

@@ -1,5 +1,4 @@
 package com.ocwvar.whattoeat.Unit
-
 import java.util.*
 
 /**
@@ -7,7 +6,7 @@ import java.util.*
  * Created by OCWVAR
  * On 17-6-26 下午2:32
  * File Location com.ocwvar.whattoeat.Unit
- * This file use to :   数据储存容器
+ * This file use to :   数据储存，数据查询获取。非数据修改编辑类操作
  */
 object DATA {
 
@@ -37,7 +36,7 @@ object DATA {
      * @param menuTitle 菜单名称
      * @return  菜单位置
      */
-    fun indexMenuByTitle(menuTitle: String): Int = (0..menus.size).firstOrNull { menus[it].title.equals(menuTitle) } ?: -1
+    fun indexMenuByTitle(menuTitle: String): Int = (0..menus.size - 1).firstOrNull { menus[it].title.equals(menuTitle) } ?: -1
 
     /**
      * @return  已启用的菜单列表

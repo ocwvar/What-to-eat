@@ -1,8 +1,9 @@
 package com.ocwvar.whattoeat;
 
-import org.junit.Test;
+import com.google.gson.Gson;
+import com.ocwvar.whattoeat.Unit.Menu;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -12,6 +13,7 @@ import static org.junit.Assert.assertEquals;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() throws Exception {
-        assertEquals(4, 2 + 2);
+        final String data = "{\"foods\":[{\"message\":\"\",\"title\":\"您近年来\"}],\"message\":\"\",\"title\":\"积极\"}";
+        final Menu menu = new Gson().fromJson(data, Menu.class);
     }
 }

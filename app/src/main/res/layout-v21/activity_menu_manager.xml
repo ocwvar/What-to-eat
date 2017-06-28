@@ -10,7 +10,6 @@
         android:layout_height="?actionBarSize"
         android:background="?colorPrimary"
         app:subtitleTextAppearance="@style/ToolBarStyle.SubTitleTextAppearance"
-        app:theme="@style/ToolBarStyle"
         app:titleTextAppearance="@style/ToolBarStyle.TitleTextAppearance" />
 
     <android.support.v7.widget.RecyclerView
@@ -25,6 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:src="@drawable/ic_action_add"
+        android:transitionName="fab"
         app:fabSize="normal"
         app:useCompatPadding="true" />
 

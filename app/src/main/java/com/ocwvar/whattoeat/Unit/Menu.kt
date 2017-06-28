@@ -13,12 +13,14 @@ import java.util.*
  */
 data class Menu(val foods: ArrayList<Food>, val title: String, val message: String) : Parcelable {
 
-    constructor(parcel: Parcel) : this(
-            TODO("foods"),
+    constructor(listData: ArrayList<Food>, parcel: Parcel) : this(
+            listData,
             parcel.readString(),
-            parcel.readString())
+            parcel.readString()
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeList(foods)
         parcel.writeString(title)
         parcel.writeString(message)
     }
@@ -29,7 +31,9 @@ data class Menu(val foods: ArrayList<Food>, val title: String, val message: Stri
 
     companion object CREATOR : Parcelable.Creator<Menu> {
         override fun createFromParcel(parcel: Parcel): Menu {
-            return Menu(parcel)
+            val listData: ArrayList<Food> = ArrayList()
+            parcel.readList(listData, Food.javaClass.classLoader)
+            return Menu(listData, parcel)
         }
 
         override fun newArray(size: Int): Array<Menu?> {

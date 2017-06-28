@@ -39,20 +39,20 @@ class MenuListAdapter(val callback: Callback) : RecyclerView.Adapter<RecyclerVie
         views.count.text = String.format("%d/%d", randomCount, menuObject.foods.size)
 
         //默认未启用状态样式
-        views.status.text = views.itemView.resources.getText(R.string.item_menu_enabled)
-        views.status.setTextColor(views.itemView.resources.getColor(R.color.colorAccent))
+        views.status.text = views.itemView.resources.getText(R.string.item_menu_disabled)
+        views.status.setTextColor(views.itemView.resources.getColor(R.color.colorPrimary))
         if (isEnabled) {
             //已启用样式
-            views.status.text = views.itemView.resources.getText(R.string.item_menu_disabled)
-            views.status.setTextColor(views.itemView.resources.getColor(R.color.colorPrimary))
+            views.status.text = views.itemView.resources.getText(R.string.item_menu_enabled)
+            views.status.setTextColor(views.itemView.resources.getColor(R.color.colorAccent))
         }
     }
 
     override fun getItemCount(): Int = DATA.menus.size
 
     interface Callback {
-        fun onClick(menu: Menu)
-        fun onLongClick(menu: Menu): Boolean
+        fun onClick(menu: Menu, position: Int)
+        fun onLongClick(menu: Menu, position: Int): Boolean
     }
 
     private inner class MenuViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -64,10 +64,10 @@ class MenuListAdapter(val callback: Callback) : RecyclerView.Adapter<RecyclerVie
 
         init {
             itemView.setOnClickListener {
-                callback.onClick(DATA.menus[adapterPosition])
+                callback.onClick(DATA.menus[adapterPosition], adapterPosition)
             }
             itemView.setOnLongClickListener {
-                callback.onLongClick(DATA.menus[adapterPosition])
+                callback.onLongClick(DATA.menus[adapterPosition], adapterPosition)
             }
         }
 

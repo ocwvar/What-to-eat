@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:src="@drawable/ic_main_eat"
+        android:transitionName="fab"
         app:fabSize="normal"
         app:useCompatPadding="true" />
 

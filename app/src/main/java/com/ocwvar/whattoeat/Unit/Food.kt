@@ -15,7 +15,8 @@ data class Food(val title: String, val message: String?, val icon: String?) : Pa
     constructor(parcel: Parcel) : this(
             parcel.readString(),
             parcel.readString(),
-            parcel.readString())
+            parcel.readString()
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(title)

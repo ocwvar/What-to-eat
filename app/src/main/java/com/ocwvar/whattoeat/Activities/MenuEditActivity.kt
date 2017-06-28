@@ -1,4 +1,4 @@
-package com.ocwvar.whattoeat
+package com.ocwvar.whattoeat.Activities
 
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
@@ -12,11 +12,11 @@ import android.view.View
 import android.widget.EditText
 import com.ocwvar.darkpurple.Units.ToastMaker
 import com.ocwvar.whattoeat.Adapter.FoodListAdapter
+import com.ocwvar.whattoeat.R
 import com.ocwvar.whattoeat.Unit.DATA
 import com.ocwvar.whattoeat.Unit.DATAHelper
 import com.ocwvar.whattoeat.Unit.Food
 import com.ocwvar.whattoeat.Unit.Menu
-import java.lang.ref.WeakReference
 import java.util.*
 
 /**
@@ -103,6 +103,8 @@ class MenuEditActivity : AppCompatActivity(), FoodListAdapter.Callback, View.OnC
                     exitPage(ACTION_EXIT_ERROR)
                     return
                 }
+                //创建基于空列表的适配器
+                adapter = FoodListAdapter(menuObject.foods, this@MenuEditActivity)
                 //设定这次的Action
                 exitAction = ACTION_EXIT_SAVE
                 //设置数据到本地
@@ -181,7 +183,7 @@ class MenuEditActivity : AppCompatActivity(), FoodListAdapter.Callback, View.OnC
                         finish()
                     } else {
                         //储存数据失败
-                        ToastMaker.show(this@MenuEditActivity, R.string.menu_edit_ERROR_menu_save, ToastMaker.TOAST_COLOR_NORMAL)
+                        ToastMaker.show(this@MenuEditActivity, R.string.menu_edit_ERROR_menu_save, ToastMaker.TOAST_COLOR_WARNING)
                     }
                 }
             }
@@ -212,7 +214,7 @@ class MenuEditActivity : AppCompatActivity(), FoodListAdapter.Callback, View.OnC
                         finish()
                     } else {
                         //储存数据失败
-                        ToastMaker.show(this@MenuEditActivity, R.string.menu_edit_ERROR_menu_save, ToastMaker.TOAST_COLOR_NORMAL)
+                        ToastMaker.show(this@MenuEditActivity, R.string.menu_edit_ERROR_menu_save, ToastMaker.TOAST_COLOR_WARNING)
                     }
                 }
             }
@@ -231,7 +233,7 @@ class MenuEditActivity : AppCompatActivity(), FoodListAdapter.Callback, View.OnC
      * @param   name    文件名称
      * @return  是否合法
      */
-    fun isNameValid(name: String): Boolean = name.contains("|\\?*<\":>+[]/'")
+    fun isNameValid(name: String): Boolean = !name.contains("|\\?*<\":>+[]/'")
 
     /**
      * 点击浮动按钮，进行食品添加
@@ -264,6 +266,7 @@ class MenuEditActivity : AppCompatActivity(), FoodListAdapter.Callback, View.OnC
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             //点击返回时，显示保存确认对话框
             AlertDialog.Builder(this@MenuEditActivity)
+                    .setMessage(R.string.menu_edit_dialog_exit_title)
                     .setNegativeButton(R.string.menu_edit_dialog_exit_unSave, { p0, p1 ->
                         p0.dismiss()
                         finish()
@@ -282,7 +285,6 @@ class MenuEditActivity : AppCompatActivity(), FoodListAdapter.Callback, View.OnC
      */
     private inner class FoodEditDialog {
 
-        private var viewKeeper: WeakReference<View?> = WeakReference(null)
         private lateinit var titleInput: EditText
         private lateinit var messageInput: EditText
 
@@ -293,7 +295,7 @@ class MenuEditActivity : AppCompatActivity(), FoodListAdapter.Callback, View.OnC
          */
         fun show(food: Food?, position: Int) {
             //生成或者获取原有布局
-            var dialogView: View = viewKeeper.get() ?: LayoutInflater.from(this@MenuEditActivity).inflate(R.layout.dialog_food_edit, null, false)
+            var dialogView: View = LayoutInflater.from(this@MenuEditActivity).inflate(R.layout.dialog_food_edit, null, false)
 
             //控件绑定
             titleInput = dialogView.findViewById<EditText>(R.id.food_edit_title).let {
@@ -305,31 +307,31 @@ class MenuEditActivity : AppCompatActivity(), FoodListAdapter.Callback, View.OnC
                 it
             }
 
-            viewKeeper = WeakReference(dialogView)
-
             //显示对话框
-            AlertDialog.Builder(this@MenuEditActivity).setPositiveButton(R.string.simple_done) { p0, p1 ->
-                //确定按钮，进行食品添加
-                val title: String? = titleInput.text.toString()
-                val message: String? = messageInput.text.toString()
-                if (TextUtils.isEmpty(title)) {
-                    //名称为空，不能进行添加
-                    ToastMaker.show(this@MenuEditActivity, R.string.menu_edit_INFO_menu_save_no_foods, ToastMaker.TOAST_COLOR_WARNING)
-                } else {
-                    //添加数据
-                    if (position < 0) {
-                        //当前是创建对象操作
-                        foods.add(Food(title!!, message, null))
-                        adapter.notifyItemInserted(foods.size - 1)
-                    } else {
-                        //当前是编辑对象操作
-                        foods.removeAt(position)
-                        foods.add(position, Food(title!!, message, null))
-                        adapter.notifyItemChanged(position)
-                    }
-                    p0?.dismiss()
-                }
-            }.show()
+            AlertDialog.Builder(this@MenuEditActivity)
+                    .setView(dialogView)
+                    .setPositiveButton(R.string.simple_done) { p0, p1 ->
+                        //确定按钮，进行食品添加
+                        val title: String? = titleInput.text.toString()
+                        val message: String? = messageInput.text.toString()
+                        if (TextUtils.isEmpty(title)) {
+                            //名称为空，不能进行添加
+                            ToastMaker.show(this@MenuEditActivity, R.string.menu_edit_INFO_menu_save_no_foods, ToastMaker.TOAST_COLOR_WARNING)
+                        } else {
+                            //添加数据
+                            if (position < 0) {
+                                //当前是创建对象操作
+                                foods.add(Food(title!!, message, null))
+                                adapter.notifyItemInserted(foods.size - 1)
+                            } else {
+                                //当前是编辑对象操作
+                                foods.removeAt(position)
+                                foods.add(position, Food(title!!, message, null))
+                                adapter.notifyItemChanged(position)
+                            }
+                            p0?.dismiss()
+                        }
+                    }.show()
         }
     }
 
