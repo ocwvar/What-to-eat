@@ -30,9 +30,14 @@
     <string name="menu_edit_ERROR_menu_name">菜单名称为空或包含不可用字符</string>
     <string name="menu_edit_ERROR_menu_save">数据存储失败，请检查储存容量和应用权限</string>
     <string name="menu_edit_ERROR_menu_create_no_foods">食品列表为空，数据不进行保存</string>
+    <string name="menu_edit_ERROR_food_create_no_data">食品标题为空，无法储存</string>
     <string name="menu_edit_INFO_menu_save_no_foods">食品列表为空，取消菜单创建</string>
     <string name="menu_edit_INFO_menu_saved">已储存菜单数据</string>
+    <string name="menu_edit_mode_title_edit">编辑菜单数据</string>
+    <string name="menu_edit_mode_title_create">创建新菜单</string>
+    <string name="menu_edit_header_title">菜单标题:</string>
     <string name="menu_edit_hint_title">输入菜单标题 (必填)</string>
+    <string name="menu_edit_header_message">菜单简介:</string>
     <string name="menu_edit_hint_message">输入菜单简介</string>
     <string name="menu_edit_dialog_food_edit_title">食品数据</string>
     <string name="menu_edit_dialog_food_edit_hint_title">名称 (必填)</string>

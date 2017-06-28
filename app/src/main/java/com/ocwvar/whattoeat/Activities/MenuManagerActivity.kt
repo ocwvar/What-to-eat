@@ -3,6 +3,7 @@ package com.ocwvar.whattoeat.Activities
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.util.Pair
 import android.support.v7.app.AlertDialog
@@ -11,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
+import android.view.MotionEvent
 import android.view.View
 import com.ocwvar.whattoeat.Adapter.MenuListAdapter
 import com.ocwvar.whattoeat.R
@@ -28,28 +30,50 @@ import com.ocwvar.whattoeat.Unit.Menu
 class MenuManagerActivity : AppCompatActivity(), MenuListAdapter.Callback, View.OnClickListener {
 
     private val adapter: MenuListAdapter = MenuListAdapter(this@MenuManagerActivity)
-    private lateinit var toolbar: Toolbar
+    private lateinit var fab: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu_manager)
 
-        val recycleView: RecyclerView = findViewById(R.id.recycleView) as RecyclerView
-        findViewById(R.id.fab).setOnClickListener(this@MenuManagerActivity)
-        toolbar = findViewById(R.id.toolbar) as Toolbar
-
-        recycleView.layoutManager = LinearLayoutManager(this@MenuManagerActivity, LinearLayoutManager.VERTICAL, false)
-        recycleView.setHasFixedSize(true)
-        recycleView.adapter = adapter
-
-        setSupportActionBar(toolbar)
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_action_back)
         title = getString(R.string.menu_list_name)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        //ToolBar属性设置
+        (findViewById(R.id.toolbar) as Toolbar).let {
+            setSupportActionBar(it)
+            supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_action_back)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
+
+        //FAB属性设置
+        (findViewById(R.id.fab) as FloatingActionButton).let {
+            it.setOnClickListener(this@MenuManagerActivity)
+            fab = it
+        }
+
+        //RecycleView属性设置
+        (findViewById(R.id.recycleView) as RecyclerView).let {
+            it.setOnTouchListener { view, motionEvent ->
+                //滑动列表时隐藏FAB，抬起手指重新显示
+                when (motionEvent.action) {
+                    MotionEvent.ACTION_MOVE -> {
+                        fab.hide()
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        fab.show()
+                    }
+                }
+                false
+            }
+            it.layoutManager = LinearLayoutManager(this@MenuManagerActivity, LinearLayoutManager.VERTICAL, false)
+            it.setHasFixedSize(true)
+            it.adapter = adapter
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+        //点击ActionBar上的返回按钮
             android.R.id.home -> {
                 finish()
             }

@@ -5,11 +5,14 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.Toolbar
 import android.text.TextUtils
 import android.view.KeyEvent
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
+import android.widget.TextView
 import com.ocwvar.darkpurple.Units.ToastMaker
 import com.ocwvar.whattoeat.Adapter.FoodListAdapter
 import com.ocwvar.whattoeat.R
@@ -72,7 +75,7 @@ class MenuEditActivity : AppCompatActivity(), FoodListAdapter.Callback, View.OnC
     var oldMessage: String = ""
 
     lateinit var menuTitleInput: EditText
-    lateinit var menuMessageInput: EditText
+    lateinit var menuMessageInput: TextView
 
     private var foodEditDialog: FoodEditDialog? = null
 
@@ -123,17 +126,44 @@ class MenuEditActivity : AppCompatActivity(), FoodListAdapter.Callback, View.OnC
         }
 
         setContentView(R.layout.activity_menu_edit)
-        val recycleView: RecyclerView = findViewById(R.id.recycleView) as RecyclerView
-        menuTitleInput = findViewById(R.id.menu_edit_title) as EditText
-        menuMessageInput = findViewById(R.id.menu_edit_message) as EditText
+
         findViewById(R.id.fab).setOnClickListener(this@MenuEditActivity)
 
-        recycleView.layoutManager = LinearLayoutManager(this@MenuEditActivity, LinearLayoutManager.VERTICAL, false)
-        recycleView.setHasFixedSize(true)
-        recycleView.adapter = adapter
+        //标题输入框属性设置
+        (findViewById(R.id.menu_edit_title) as EditText).let {
+            it.setText(oldTitle)
+            menuTitleInput = it
+        }
 
-        menuTitleInput.setText(oldTitle)
-        menuMessageInput.setText(oldMessage)
+        //消息输入框属性设置
+        (findViewById(R.id.menu_edit_message) as TextView).let {
+            it.setOnClickListener(this@MenuEditActivity)
+            it.text = oldMessage
+            menuMessageInput = it
+        }
+
+        //ToolBar属性设置
+        (findViewById(R.id.toolbar) as Toolbar).let {
+            setSupportActionBar(it)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_action_back)
+            when (exitAction) {
+                ACTION_EXIT_SAVE -> {
+                    supportActionBar?.title = getString(R.string.menu_edit_mode_title_edit)
+                }
+                ACTION_EXIT_SAVE_CREATE -> {
+                    supportActionBar?.title = getString(R.string.menu_edit_mode_title_create)
+                }
+            }
+        }
+
+        //RecycleView属性设置
+        (findViewById(R.id.recycleView) as RecyclerView).let {
+            it.layoutManager = LinearLayoutManager(this@MenuEditActivity, LinearLayoutManager.VERTICAL, false)
+            it.setHasFixedSize(true)
+            it.adapter = adapter
+        }
+
     }
 
     /**
@@ -166,7 +196,7 @@ class MenuEditActivity : AppCompatActivity(), FoodListAdapter.Callback, View.OnC
                 } else {
                     //菜单可以进行储存
                     //获取菜单的信息数据
-                    val message: String = menuMessageInput.text.toString()
+                    val message: String = oldMessage
                     val helper: DATAHelper = DATAHelper(this@MenuEditActivity)
 
                     //名称检查与对应操作的结果标记变量
@@ -206,7 +236,7 @@ class MenuEditActivity : AppCompatActivity(), FoodListAdapter.Callback, View.OnC
                 } else {
                     //菜单可以进行储存
                     //获取菜单的信息数据
-                    val message: String = menuMessageInput.text.toString()
+                    val message: String = oldMessage
 
                     if (DATAHelper(this@MenuEditActivity).saveMenu(Menu(foods, title, message))) {
                         //储存数据成功
@@ -235,16 +265,76 @@ class MenuEditActivity : AppCompatActivity(), FoodListAdapter.Callback, View.OnC
      */
     fun isNameValid(name: String): Boolean = !name.contains("|\\?*<\":>+[]/'")
 
+    override fun onCreateOptionsMenu(menu: android.view.Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_menu_edit, menu)
+        return true
+    }
+
     /**
-     * 点击浮动按钮，进行食品添加
+     * ToolBar按钮点击事件
+     */
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+
+        //点击返回按钮事件
+            android.R.id.home -> {
+                //点击返回时，显示保存确认对话框
+                AlertDialog.Builder(this@MenuEditActivity)
+                        .setMessage(R.string.menu_edit_dialog_exit_title)
+                        .setNegativeButton(R.string.menu_edit_dialog_exit_unSave, { p0, p1 ->
+                            p0.dismiss()
+                            finish()
+                        })
+                        .setPositiveButton(R.string.menu_edit_dialog_exit_save, { p0, p1 ->
+                            p0.dismiss()
+                            exitPage(exitAction)
+                        })
+                        .show()
+            }
+
+        //点击保存按钮事件
+            R.id.menu_menu_edit_done -> {
+                //保存数据退出
+                exitPage(exitAction)
+            }
+
+        }
+        return true
+    }
+
+    /**
+     * 其他界面上的点击事件
+     * FAB
+     * 菜单信息文字
      */
     override fun onClick(view: View) {
         when (view.id) {
+
+        //FAB点击事件
             R.id.fab -> {
                 if (foodEditDialog == null) {
                     foodEditDialog = FoodEditDialog()
                 }
                 foodEditDialog?.show(null, -1)
+            }
+
+        //菜单信息文字,显示一个输入对话框让用户输入
+            R.id.menu_edit_message -> {
+                val editText: EditText = EditText(this@MenuEditActivity).let {
+                    it.hint = getString(R.string.menu_edit_hint_message)
+                    it.background = null
+                    it.setEms(5)
+                    it.setText(oldMessage)
+                    it
+                }
+                AlertDialog.Builder(this@MenuEditActivity)
+                        .setView(editText)
+                        .setPositiveButton(R.string.simple_done, { p0, p1 ->
+                            menuMessageInput.text = editText.text.toString()
+                            oldMessage = editText.text.toString()
+                            p0.cancel()
+                        })
+                        .show()
             }
         }
     }
@@ -316,7 +406,7 @@ class MenuEditActivity : AppCompatActivity(), FoodListAdapter.Callback, View.OnC
                         val message: String? = messageInput.text.toString()
                         if (TextUtils.isEmpty(title)) {
                             //名称为空，不能进行添加
-                            ToastMaker.show(this@MenuEditActivity, R.string.menu_edit_INFO_menu_save_no_foods, ToastMaker.TOAST_COLOR_WARNING)
+                            ToastMaker.show(this@MenuEditActivity, R.string.menu_edit_ERROR_food_create_no_data, ToastMaker.TOAST_COLOR_WARNING)
                         } else {
                             //添加数据
                             if (position < 0) {
