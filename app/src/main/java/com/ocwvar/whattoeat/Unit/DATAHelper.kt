@@ -102,7 +102,14 @@ class DATAHelper(appContext: Context) {
      * @param   menuTitle  菜单名称
      * @param   count   随机数量
      */
-    fun saveCount(menuTitle: String, count: Int): Boolean = spDecoder.saveCount(menuTitle, count)
+    fun saveCount(menuTitle: String, count: Int): Boolean {
+        if (spDecoder.saveCount(menuTitle, count)) {
+            DATA.counts.remove(menuTitle)
+            DATA.counts.put(menuTitle, count)
+            return true
+        }
+        return false
+    }
 
     /**
      * 更新已启用菜单列表数据到SP中

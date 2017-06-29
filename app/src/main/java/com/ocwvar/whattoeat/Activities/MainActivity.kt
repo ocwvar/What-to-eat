@@ -51,10 +51,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
                 startActivity(Intent(this@MainActivity, MenuManagerActivity::class.java), animBundle)
             }
-
-            R.id.menu_main_random -> {
-
-            }
         }
         return true
     }

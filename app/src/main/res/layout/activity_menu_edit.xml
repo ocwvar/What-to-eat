@@ -45,7 +45,8 @@
                     android:singleLine="true"
                     android:textColor="#fff"
                     android:textColorHint="#73ffffff"
-                    android:textSize="25sp" />
+                    android:textSize="25sp"
+                    android:transitionName="title" />
 
                 <TextView
                     android:layout_width="match_parent"

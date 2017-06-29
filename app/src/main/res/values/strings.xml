@@ -15,14 +15,18 @@
     <string name="item_menu_disabled">未启用</string>
 
     <!--Menu列表页面文字-->
+    <string name="menu_list_ERROR_dialog_option_number">随机数量不正确</string>
     <string name="menu_list_name">@string/menu_main_menus</string>
     <string name="menu_list_subTitle_header">当前菜单数量：</string>
     <string name="menu_list_dialog_delete_title">是否删除此菜单？</string>
     <string name="menu_list_dialog_delete_yes">删除菜单</string>
     <string name="menu_list_dialog_delete_no">返回</string>
-    <string name="menu_list_dialog_edit_title">是否进入编辑菜单界面？</string>
-    <string name="menu_list_dialog_edit_yes">开始编辑</string>
-    <string name="menu_list_dialog_edit_no">返回</string>
+    <string name="menu_list_dialog_edit_title">您是要编辑菜单内容还是修改菜单属性？</string>
+    <string name="menu_list_dialog_edit_edit">编辑内容条目</string>
+    <string name="menu_list_dialog_edit_option">修改属性</string>
+    <string name="menu_list_dialog_option_title">菜单属性设置</string>
+    <string name="menu_list_dialog_option_title_random">菜单随机属性设置</string>
+    <string name="menu_list_dialog_option_title_enable">此菜单是否参与随机</string>
 
     <!--Menu编辑页面文字-->
     <string name="menu_edit_ERROR_data">数据错误，无法进行编辑或创建</string>

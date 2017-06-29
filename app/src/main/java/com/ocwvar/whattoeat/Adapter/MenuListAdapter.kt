@@ -39,35 +39,33 @@ class MenuListAdapter(val callback: Callback) : RecyclerView.Adapter<RecyclerVie
         views.count.text = String.format("%d/%d", randomCount, menuObject.foods.size)
 
         //默认未启用状态样式
-        views.status.text = views.itemView.resources.getText(R.string.item_menu_disabled)
-        views.status.setTextColor(views.itemView.resources.getColor(R.color.colorPrimary))
+        views.status.setBackgroundColor(views.itemView.resources.getColor(R.color.colorPrimary))
         if (isEnabled) {
             //已启用样式
-            views.status.text = views.itemView.resources.getText(R.string.item_menu_enabled)
-            views.status.setTextColor(views.itemView.resources.getColor(R.color.colorAccent))
+            views.status.setBackgroundColor(views.itemView.resources.getColor(R.color.colorAccent))
         }
     }
 
     override fun getItemCount(): Int = DATA.menus.size
 
     interface Callback {
-        fun onClick(menu: Menu, position: Int)
-        fun onLongClick(menu: Menu, position: Int): Boolean
+        fun onClick(menu: Menu, position: Int, itemView: View)
+        fun onLongClick(menu: Menu, position: Int, itemView: View): Boolean
     }
 
     private inner class MenuViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val title: TextView = itemView.findViewById(R.id.item_menu_title)
         val message: TextView = itemView.findViewById(R.id.item_menu_message)
-        val status: TextView = itemView.findViewById(R.id.item_menu_status)
+        val status: View = itemView.findViewById(R.id.item_menu_status_bar)
         val count: TextView = itemView.findViewById(R.id.item_menu_count)
 
         init {
             itemView.setOnClickListener {
-                callback.onClick(DATA.menus[adapterPosition], adapterPosition)
+                callback.onClick(DATA.menus[adapterPosition], adapterPosition, itemView)
             }
             itemView.setOnLongClickListener {
-                callback.onLongClick(DATA.menus[adapterPosition], adapterPosition)
+                callback.onLongClick(DATA.menus[adapterPosition], adapterPosition, itemView)
             }
         }
 
