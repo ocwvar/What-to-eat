@@ -22,6 +22,6 @@
         android:drawablePadding="10dp"
         android:gravity="center"
         android:padding="20dp"
-        android:text="@string/menu_main_menus" />
+        android:text="@string/main_menus" />
 
 </FrameLayout>

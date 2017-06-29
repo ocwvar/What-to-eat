@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycleView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:src="@drawable/ic_action_done_pink"
+        app:backgroundTint="#fff"
+        app:fabSize="normal"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:useCompatPadding="true" />
+
+    <TextView
+        android:id="@+id/result_waiting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:clickable="false"
+        android:focusable="false"
+        android:gravity="center"
+        android:text="@string/result_waiting_text"
+        android:textColor="#fff"
+        android:textSize="40sp"
+        android:visibility="invisible" />
+
+</FrameLayout>

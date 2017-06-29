@@ -15,7 +15,9 @@ import android.view.ViewAnimationUtils
 import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import com.ocwvar.darkpurple.Units.ToastMaker
 import com.ocwvar.whattoeat.R
+import com.ocwvar.whattoeat.Unit.DATA
 
 /**
  * Project Whattoeat
@@ -80,7 +82,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         when (view.id) {
             R.id.fab -> {
-                //点击中央按钮，开始执行动画并转跳页面
+                //点击中央按钮
+                //先判断是否有已启用的菜单
+                if (DATA.enabledMenus().size <= 0) {
+                    //没有启用菜单
+                    ToastMaker.show(this@MainActivity, R.string.main_ERROR_no_enabled_menus, ToastMaker.TOAST_COLOR_WARNING)
+                    return
+                }
+
+                //开始执行动画并转跳页面
                 if (Build.VERSION.SDK_INT >= 21) {
                     show21Animation()
                 } else {
@@ -107,7 +117,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         //当前正在执行动画，不接受按键点击事件反馈
-        return isShowingAnimation
+        if (!isShowingAnimation) {
+            return super.onKeyDown(keyCode, event)
+        } else {
+            return true
+        }
     }
 
     /**
@@ -152,7 +166,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 }
             })
             //动画时长
-            it.duration = 3000L
+            it.duration = 600L
             it
         }
 

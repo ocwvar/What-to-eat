@@ -24,12 +24,15 @@
 
         <activity
             android:name=".Activities.MenuManagerActivity"
-            android:label="@string/menu_list_name"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".Activities.MenuEditActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".Activities.ResultActivity"
+            android:theme="@style/ResultActivity_Theme" />
 
     </application>
 
