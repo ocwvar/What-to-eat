@@ -42,7 +42,7 @@ class RandomHelper {
         if (menu.foods.size > 1 && count in 1..menu.foods.size - 1) {
             //在有效范围内才进行获取数据
             val result: ArrayList<Food> = ArrayList()
-            for (i in 0..count) {
+            for (i in 0..count - 1) {
                 //将数据放入容器内
                 result.add(menu.foods[random.nextInt(menu.foods.size - 1)])
             }

@@ -84,7 +84,11 @@ class MenuManagerActivity : AppCompatActivity(), MenuListAdapter.Callback, View.
         when (item.itemId) {
         //点击ActionBar上的返回按钮
             android.R.id.home -> {
-                finish()
+                if (Build.VERSION.SDK_INT >= 21) {
+                    finishAfterTransition()
+                } else {
+                    finish()
+                }
             }
         }
         return true

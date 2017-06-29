@@ -1,5 +1,6 @@
 package com.ocwvar.whattoeat.Activities
 
+import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -188,7 +189,11 @@ class MenuEditActivity : AppCompatActivity(), FoodListAdapter.Callback, View.OnC
                     //菜单食物列表为空，直接删除菜单数据，并退出页面
                     if (DATAHelper(this@MenuEditActivity).removeMenu(title)) {
                         ToastMaker.show(this@MenuEditActivity, R.string.menu_edit_ERROR_menu_create_no_foods, ToastMaker.TOAST_COLOR_NORMAL)
-                        finish()
+                        if (Build.VERSION.SDK_INT >= 21) {
+                            finishAfterTransition()
+                        } else {
+                            finish()
+                        }
                     } else {
                         //删除失败
                         ToastMaker.show(this@MenuEditActivity, R.string.menu_edit_ERROR_menu_save, ToastMaker.TOAST_COLOR_NORMAL)
@@ -210,7 +215,11 @@ class MenuEditActivity : AppCompatActivity(), FoodListAdapter.Callback, View.OnC
                     if (canBeSave && helper.saveMenu(Menu(foods, title, message))) {
                         //储存数据成功
                         ToastMaker.show(this@MenuEditActivity, R.string.menu_edit_INFO_menu_saved, ToastMaker.TOAST_COLOR_NORMAL)
-                        finish()
+                        if (Build.VERSION.SDK_INT >= 21) {
+                            finishAfterTransition()
+                        } else {
+                            finish()
+                        }
                     } else {
                         //储存数据失败
                         ToastMaker.show(this@MenuEditActivity, R.string.menu_edit_ERROR_menu_save, ToastMaker.TOAST_COLOR_WARNING)
@@ -232,7 +241,11 @@ class MenuEditActivity : AppCompatActivity(), FoodListAdapter.Callback, View.OnC
                 } else if (foods.size <= 0) {
                     //菜单食物列表为空，直接退出页面，不进行列表的储存
                     ToastMaker.show(this@MenuEditActivity, R.string.menu_edit_INFO_menu_save_no_foods, ToastMaker.TOAST_COLOR_NORMAL)
-                    finish()
+                    if (Build.VERSION.SDK_INT >= 21) {
+                        finishAfterTransition()
+                    } else {
+                        finish()
+                    }
                 } else {
                     //菜单可以进行储存
                     //获取菜单的信息数据
@@ -241,7 +254,11 @@ class MenuEditActivity : AppCompatActivity(), FoodListAdapter.Callback, View.OnC
                     if (DATAHelper(this@MenuEditActivity).saveMenu(Menu(foods, title, message))) {
                         //储存数据成功
                         ToastMaker.show(this@MenuEditActivity, R.string.menu_edit_INFO_menu_saved, ToastMaker.TOAST_COLOR_NORMAL)
-                        finish()
+                        if (Build.VERSION.SDK_INT >= 21) {
+                            finishAfterTransition()
+                        } else {
+                            finish()
+                        }
                     } else {
                         //储存数据失败
                         ToastMaker.show(this@MenuEditActivity, R.string.menu_edit_ERROR_menu_save, ToastMaker.TOAST_COLOR_WARNING)
@@ -252,7 +269,11 @@ class MenuEditActivity : AppCompatActivity(), FoodListAdapter.Callback, View.OnC
         //发生错误退出页面
             ACTION_EXIT_ERROR -> {
                 ToastMaker.show(this@MenuEditActivity, R.string.menu_edit_ERROR_data, ToastMaker.TOAST_COLOR_WARNING)
-                finish()
+                if (Build.VERSION.SDK_INT >= 21) {
+                    finishAfterTransition()
+                } else {
+                    finish()
+                }
             }
 
         }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">What2Eat</string>
+    <string name="item_menu_disabled">Disabled</string>
+    <string name="item_menu_enabled">Enabled</string>
+    <string name="item_menu_random">Random count</string>
+    <string name="main_ERROR_no_enabled_menus">No enabled menu, cant show any result</string>
+    <string name="main_menus">Menu Manager</string>
+    <string name="menu_edit_ERROR_data">Cant edit or create data</string>
+    <string name="menu_edit_ERROR_food_create_no_data">Empty food name</string>
+    <string name="menu_edit_ERROR_menu_create_no_foods">Cant save menu,because has empty food list</string>
+    <string name="menu_edit_ERROR_menu_existed">Already have a same menu in that name</string>
+    <string name="menu_edit_ERROR_menu_name">Menu name is empty or has unavailable char</string>
+    <string name="menu_edit_ERROR_menu_save">Failed to save data,plz check your premission setting</string>
+    <string name="menu_edit_INFO_menu_save_no_foods">Cant save menu,because has empty food list</string>
+    <string name="menu_edit_INFO_menu_saved">Menu data saved</string>
+    <string name="menu_edit_dialog_exit_save">Update data</string>
+    <string name="menu_edit_dialog_exit_title">Do you want to update all data of this menu?</string>
+    <string name="menu_edit_dialog_exit_unSave">Just leave</string>
+    <string name="menu_edit_dialog_food_edit_hint_message">Food\'s information</string>
+    <string name="menu_edit_dialog_food_edit_hint_title">Menu name*</string>
+    <string name="menu_edit_dialog_food_edit_title">Food data</string>
+    <string name="menu_edit_header_message">Menu Information:</string>
+    <string name="menu_edit_header_title">Menu name:</string>
+    <string name="menu_edit_hint_message">Input menu information</string>
+    <string name="menu_edit_hint_title">Input menu name*</string>
+    <string name="menu_edit_mode_title_create">New menu</string>
+    <string name="menu_edit_mode_title_edit">Edit menu</string>
+    <string name="menu_list_ERROR_dialog_option_number">Wrong number</string>
+    <string name="menu_list_dialog_delete_no">Back</string>
+    <string name="menu_list_dialog_delete_title">Delete this menu?</string>
+    <string name="menu_list_dialog_delete_yes">Delete</string>
+    <string name="menu_list_dialog_edit_edit">Edit menu</string>
+    <string name="menu_list_dialog_edit_option">Change Options</string>
+    <string name="menu_list_dialog_edit_title">You want to change menu options or edit menu data ?</string>
+    <string name="menu_list_dialog_option_title">Menu Options Setting</string>
+    <string name="menu_list_dialog_option_title_enable">Available to random</string>
+    <string name="menu_list_dialog_option_title_random">MenuRandom Options</string>
+    <string name="menu_list_subTitle_header">Menu Count:</string>
+    <string name="result_message">O...OKey!</string>
+    <string name="result_message_1">Eat those things!</string>
+    <string name="result_owner_header">This Result from:</string>
+    <string name="result_waiting_text">Let me see……\n(´・ω・`)</string>
+    <string name="simple_cancel">Cancel</string>
+    <string name="simple_done">Done</string>
+</resources>

@@ -54,7 +54,11 @@ class ResultActivity : AppCompatActivity() {
 
         findViewById(R.id.fab).setOnClickListener {
             if (!isWaitingForResult) {
-                finish()
+                if (Build.VERSION.SDK_INT >= 21) {
+                    finishAfterTransition()
+                } else {
+                    finish()
+                }
             }
         }
 
