@@ -59,5 +59,18 @@
     <string name="result_message">决定了！</string>
     <string name="result_message_1">我们去吃这些！</string>
     <string name="result_owner_header">菜单：</string>
+    <string name="result_ERROR_record_name">记录名称为空或包含不可用字符，已使用默认标题</string>
+    <string name="result_dialog_input_hit">输入记录名称</string>
+    <string name="result_dialog_save">保存记录</string>
+    <string name="result_dialog_not_save">不保存</string>
+    <string name="result_record_default_name_header">记录 编号:</string>
+
+    <!--记录页面文字-->
+    <string name="record_title">历史记录管理</string>
+    <string name="record_dialog_deleting_title">是否删除这条记录数据？</string>
+    <string name="record_dialog_deleting_yes">删除记录</string>
+    <string name="record_dialog_deleting_no" translatable="false">@string/simple_cancel</string>
+    <string name="record_deleting_success">成功删除记录</string>
+    <string name="record_deleting_fail">记录删除失败，或文件不存在</string>
 
 </resources>

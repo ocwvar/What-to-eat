@@ -33,6 +33,7 @@ class DATAHelper(appContext: Context) {
      * 所有的菜单对象
      * 菜单对象的随机数量
      * 已启用的列表
+     * 所有的记录对象
      */
     fun initData() {
         DATA.menus.clear()
@@ -41,6 +42,8 @@ class DATAHelper(appContext: Context) {
         DATA.counts.putAll(spDecoder.loadAllCounts())
         DATA.enableList.clear()
         DATA.enableList.addAll(spDecoder.loadEnableList())
+        DATA.records.clear()
+        DATA.records.addAll(jsonDecoder.loadAllMenus(true))
     }
 
     /**
@@ -58,6 +61,7 @@ class DATAHelper(appContext: Context) {
 
     /**
      * 储存菜单数据对象为文件对象，此操作会替换现有相同名称的菜单对象
+     * @param   menu    菜单数据
      * @return  执行结果
      */
     fun saveMenu(menu: Menu): Boolean {
@@ -77,19 +81,50 @@ class DATAHelper(appContext: Context) {
     }
 
     /**
+     * 储存结果菜单为记录数据
+     * @param menu  结果菜单数据
+     * @return  执行结果
+     */
+    fun saveRecord(menu: Menu): Boolean {
+        if (jsonDecoder.saveMenu(menu, true)) {
+            DATA.records.add(menu)
+            return true
+        }
+        return false
+    }
+
+    /**
+     * 移除记录数据
+     * @param record  记录数据
+     * @return  执行结果
+     */
+    fun removeRecord(record: Menu): Boolean = removeRecord(record.title)
+
+    /**
+     * 移除记录数据
+     * @param recordTitle  记录标题
+     * @return  执行结果
+     */
+    fun removeRecord(recordTitle: String): Boolean {
+        //获取菜单文件
+        val recordFile: File = File(jsonDecoder.dataRecordFolder + recordTitle + ".menu")
+        if (recordFile.exists() && recordFile.delete()) {
+            //成功删除菜单文件后继续删除数据列表
+            val position: Int = DATA.records.indexOfLast { it.title.equals(recordTitle) }
+            if (position != -1) {
+                return DATA.records.removeAt(position) != null
+            }
+            return false
+        }
+        return false
+    }
+
+    /**
      * 移除菜单对象
      * @param   menu    菜单对象
      * @return  执行结果
      */
-    fun removeMenu(menu: Menu): Boolean {
-        //获取菜单文件
-        val menuFile: File = File(jsonDecoder.dataFolder + menu.title + ".menu")
-        if (menuFile.exists() && menuFile.delete()) {
-            //成功删除菜单文件后继续删除数据列表
-            return DATA.menus.remove(menu)
-        }
-        return false
-    }
+    fun removeMenu(menu: Menu): Boolean = removeMenu(menu.title)
 
     /**
      * 移除菜单对象
@@ -156,10 +191,14 @@ class DATAHelper(appContext: Context) {
 
         //Json数据储存目录
         val dataFolder: String = Environment.getExternalStorageDirectory().path + "/What2Eat/"
+        //历史记录数据储存目录
+        val dataRecordFolder: String = Environment.getExternalStorageDirectory().path + "/What2Eat/Record/"
+
         //目录的可用性标记
         private var isReadable: Boolean by object : Any() {
             operator fun getValue(thisRef: Any?, property: KProperty<*>): Boolean {
-                val folder: File = File(dataFolder)
+                //使用最深一层目录作为判断，因为可以一次性判断和创建所有需要的目录
+                val folder: File = File(dataRecordFolder)
                 return (folder.exists() && folder.canWrite()) || (!folder.exists() && folder.mkdirs())
             }
 
@@ -195,9 +234,10 @@ class DATAHelper(appContext: Context) {
 
         /**
          * 读取所有现有菜单数据
+         * @param   isRecord    是否读取的是记录，False = 读取普通菜单
          * @return 本地储存的菜单数据，读取失败返回空的数据列表
          */
-        fun loadAllMenus(): ArrayList<Menu> {
+        fun loadAllMenus(isRecord: Boolean = false): ArrayList<Menu> {
             //数据容器
             val result: ArrayList<Menu> = ArrayList()
 
@@ -205,8 +245,15 @@ class DATAHelper(appContext: Context) {
             if (!isReadable) return result
 
             //菜单文件列表
-            val menuFiles: Array<File>? = File(dataFolder).listFiles { file, name ->
-                (name != null) && (name!!.endsWith(".menu", false))
+            var menuFiles: Array<File>?
+            if (isRecord) {
+                menuFiles = File(dataRecordFolder).listFiles { file, name ->
+                    (name != null) && (name!!.endsWith(".menu", false))
+                }
+            } else {
+                menuFiles = File(dataFolder).listFiles { file, name ->
+                    (name != null) && (name!!.endsWith(".menu", false))
+                }
             }
 
             //如果没办法获取到数据，则直接返回空列表
@@ -233,14 +280,22 @@ class DATAHelper(appContext: Context) {
 
         /**
          * 储存菜单数据对象为文件对象，此操作会替换现有相同名称的菜单对象
+         * @param   menu        要储存的菜单数据
+         * @param   isRecord    是否储存为记录，False = 普通菜单数据
          * @return  执行结果
          */
-        fun saveMenu(menu: Menu): Boolean {
+        fun saveMenu(menu: Menu, isRecord: Boolean = false): Boolean {
             //目录不可用，不执行操作
             if (!isReadable) return false
 
             //菜单文件对象
-            val menuFile: File = File(dataFolder + menu.title + ".menu")
+            val menuFile: File
+            //根据是否为菜单和记录来分别存放不同的位置
+            if (isRecord) {
+                menuFile = File(dataRecordFolder + menu.title + ".menu")
+            } else {
+                menuFile = File(dataFolder + menu.title + ".menu")
+            }
             //Json文字字节对象
             val bytes: ByteArray = Gson().toJson(menu).toString().toByteArray(Charsets.UTF_8)
             //先删除旧的对象

@@ -46,5 +46,15 @@
     <string name="main_ERROR_no_permission">当前APP没有必须的权限</string>
     <string name="main_button_permission">申请</string>
     <string name="menu_list_dialog_refresh_message">此操作将移除所有菜单数据，并从本地已储存的文件中重新读取数据！</string>
-    <string name="menu_list_option_refresh">Reload Menus</string>
+    <string name="menu_list_option_refresh">重新读取菜单</string>
+    <string name="record_deleting_fail">记录删除失败，或文件不存在</string>
+    <string name="record_deleting_success">成功删除记录</string>
+    <string name="record_dialog_deleting_title">是否删除这条记录数据？</string>
+    <string name="record_dialog_deleting_yes">删除记录</string>
+    <string name="record_title">历史记录管理</string>
+    <string name="result_ERROR_record_name">记录名称为空或包含不可用字符，已使用默认标题</string>
+    <string name="result_dialog_input_hit">输入记录名称</string>
+    <string name="result_dialog_not_save">不保存</string>
+    <string name="result_dialog_save">保存记录</string>
+    <string name="result_record_default_name_header">记录 编号:</string>
 </resources>

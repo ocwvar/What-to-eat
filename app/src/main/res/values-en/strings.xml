@@ -46,4 +46,15 @@
     <string name="main_ERROR_no_permission">No necessary permission</string>
     <string name="main_button_permission">Give</string>
     <string name="menu_list_dialog_refresh_message">All menu data will be removed and reload from local data files!</string>
+    <string name="menu_list_option_refresh">Reload Menus</string>
+    <string name="record_deleting_fail">Record remove failed</string>
+    <string name="record_deleting_success">Remove record success</string>
+    <string name="record_dialog_deleting_title">Remove this record?</string>
+    <string name="record_dialog_deleting_yes">Remove record</string>
+    <string name="record_title">Record Manager</string>
+    <string name="result_ERROR_record_name">Record name is invalid ! Used default name as record name</string>
+    <string name="result_dialog_input_hit">Input record name</string>
+    <string name="result_dialog_not_save">Not save</string>
+    <string name="result_dialog_save">Save record</string>
+    <string name="result_record_default_name_header">Record No.</string>
 </resources>

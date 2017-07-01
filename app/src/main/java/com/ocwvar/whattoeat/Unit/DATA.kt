@@ -12,6 +12,8 @@ object DATA {
 
     //菜单数据容器
     val menus: ArrayList<Menu> = ArrayList()
+    //记录数据容器
+    val records: ArrayList<Menu> = ArrayList()
     //随机数量容器
     val counts: HashMap<String, Int> = HashMap()
     //激活列表标记

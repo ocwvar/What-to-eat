@@ -1,5 +1,6 @@
 package com.ocwvar.whattoeat.Activities
 
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
@@ -343,6 +344,7 @@ class MenuEditActivity : AppCompatActivity(), FoodListAdapter.Callback, View.OnC
             R.id.menu_edit_message -> {
                 val editText: EditText = EditText(this@MenuEditActivity).let {
                     it.hint = getString(R.string.menu_edit_hint_message)
+                    it.setHintTextColor(Color.LTGRAY)
                     it.background = null
                     it.setEms(5)
                     it.setText(oldMessage)

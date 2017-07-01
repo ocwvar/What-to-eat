@@ -60,6 +60,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         mainPanel = findViewById(R.id.mainPanel)
         findViewById(R.id.fab).setOnClickListener(this@MainActivity)
         findViewById(R.id.main_menu_manager).setOnClickListener(this@MainActivity)
+        findViewById(R.id.main_record_manager).setOnClickListener(this@MainActivity)
     }
 
     override fun onResume() {
@@ -135,6 +136,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
                 startActivity(Intent(this@MainActivity, MenuManagerActivity::class.java), animBundle)
             }
+
+            R.id.main_record_manager -> {
+                startActivity(Intent(this@MainActivity, RecordManagerActivity::class.java))
+            }
         }
     }
 
@@ -177,7 +182,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         animBundle = null
                     }
 
-                    startActivity(Intent(this@MainActivity, ResultActivity::class.java), animBundle)
+                    startActivity(Intent(this@MainActivity, ResultActivity::class.java).let {
+                        it.action = ResultActivity.ACTIONS.ACTION_NORMAL
+                        it
+                    }, animBundle)
                     isShowingAnimation = false
                 }
 
@@ -207,7 +215,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 }
 
                 override fun onAnimationEnd(p0: Animation?) {
-                    startActivity(Intent(this@MainActivity, ResultActivity::class.java))
+                    startActivity(Intent(this@MainActivity, ResultActivity::class.java).let {
+                        it.action = ResultActivity.ACTIONS.ACTION_NORMAL
+                        it
+                    })
                     isShowingAnimation = false
                 }
 

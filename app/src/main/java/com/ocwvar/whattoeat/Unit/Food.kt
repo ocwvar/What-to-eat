@@ -10,9 +10,17 @@ import android.os.Parcelable
  * File Location com.ocwvar.whattoeat.Unit
  * This file use to :   食物对象
  */
-data class Food(val title: String, val message: String?, val icon: String?) : Parcelable {
+/**
+ * 食物对象
+ * @param   title           名称
+ * @param   message         信息
+ * @param   icon            图像网址
+ * @param   extraMessage    额外信息，此属性用于Record中使用，并不需要手动设置会自动生成，默认为NULL
+ */
+data class Food(val title: String, val message: String? = null, val icon: String? = null, val extraMessage: String? = null) : Parcelable {
 
     constructor(parcel: Parcel) : this(
+            parcel.readString(),
             parcel.readString(),
             parcel.readString(),
             parcel.readString()
@@ -22,6 +30,7 @@ data class Food(val title: String, val message: String?, val icon: String?) : Pa
         parcel.writeString(title)
         parcel.writeString(message)
         parcel.writeString(icon)
+        parcel.writeString(extraMessage)
     }
 
     override fun describeContents(): Int {

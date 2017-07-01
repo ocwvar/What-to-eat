@@ -38,9 +38,14 @@ class ResultAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     /**
      * 清空列表
      */
-    fun clearSrouce() {
+    fun clearSource() {
         source.clear()
     }
+
+    /**
+     * @return  数据列表
+     */
+    fun source(): ArrayList<Any> = source
 
     /**
      * 添加数据源
@@ -102,11 +107,15 @@ class ResultAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     /**
      * 文字消息对象
+     * @param   message 显示的文字消息
+     * @param   textSize    文字大小
      */
     data class ResultMessage(val message: String, val textSize: Float = 12.0f)
 
     /**
      * 结果数据对象
+     * @param   food    食品数据对象
+     * @param   ownerTitle  所属菜单名称
      */
     data class ResultItem(val food: Food, val ownerTitle: String)
 
