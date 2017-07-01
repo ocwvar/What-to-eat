@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">What2Eat</string>
+    <string name="app_name">吃啥</string>
     <string name="item_menu_disabled">未启用</string>
     <string name="item_menu_enabled">已启用</string>
     <string name="item_menu_random">随机数量</string>
