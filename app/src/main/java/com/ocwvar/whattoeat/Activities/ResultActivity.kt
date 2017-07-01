@@ -2,10 +2,12 @@ package com.ocwvar.whattoeat.Activities
 
 import android.os.Build
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.KeyEvent
+import android.view.MotionEvent
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -29,6 +31,7 @@ class ResultActivity : AppCompatActivity() {
     private val adapter: ResultAdapter = ResultAdapter()
     private var isWaitingForResult: Boolean = false
 
+    private lateinit var fab: FloatingActionButton
     private lateinit var waitingText: View
     private lateinit var recycleView: RecyclerView
 
@@ -45,21 +48,37 @@ class ResultActivity : AppCompatActivity() {
 
         //RecycleView属性设置
         (findViewById(R.id.recycleView) as RecyclerView).let {
+            //RecycleView触摸事件，动态隐藏FAB
+            it.setOnTouchListener { view, motionEvent ->
+                when (motionEvent.action) {
+                    MotionEvent.ACTION_MOVE -> {
+                        fab.hide()
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        fab.show()
+                    }
+                }
+                false
+            }
+            it.layoutManager = LinearLayoutManager(this@ResultActivity, LinearLayoutManager.VERTICAL, false)
+            it.setHasFixedSize(false)
+            it.adapter = adapter
+            it.visibility = View.INVISIBLE
             recycleView = it
-            recycleView.layoutManager = LinearLayoutManager(this@ResultActivity, LinearLayoutManager.VERTICAL, false)
-            recycleView.setHasFixedSize(false)
-            recycleView.adapter = adapter
-            recycleView.visibility = View.INVISIBLE
         }
 
-        findViewById(R.id.fab).setOnClickListener {
-            if (!isWaitingForResult) {
-                if (Build.VERSION.SDK_INT >= 21) {
-                    finishAfterTransition()
-                } else {
-                    finish()
+        //FAB点击事件
+        (findViewById(R.id.fab) as FloatingActionButton).let {
+            it.setOnClickListener {
+                if (!isWaitingForResult) {
+                    if (Build.VERSION.SDK_INT >= 21) {
+                        finishAfterTransition()
+                    } else {
+                        finish()
+                    }
                 }
             }
+            fab = it
         }
 
         showResult()

@@ -100,7 +100,9 @@ class MenuManagerActivity : AppCompatActivity(), MenuListAdapter.Callback, View.
                 AlertDialog.Builder(this@MenuManagerActivity)
                         .setMessage(R.string.menu_list_dialog_refresh_message)
                         .setPositiveButton(R.string.simple_done, { p0, p1 ->
-                            DATAHelper(this@MenuManagerActivity).initData()
+                            val dataHelper: DATAHelper = DATAHelper(this@MenuManagerActivity)
+                            dataHelper.clearSPData()
+                            dataHelper.initData()
                             adapter.notifyDataSetChanged()
                             supportActionBar?.subtitle = String.format("%s%d", getString(R.string.menu_list_subTitle_header), DATA.menus.size)
                             p0.dismiss()

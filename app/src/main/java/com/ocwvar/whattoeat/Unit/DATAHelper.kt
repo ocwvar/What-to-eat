@@ -44,6 +44,19 @@ class DATAHelper(appContext: Context) {
     }
 
     /**
+     * 清空SP的数据
+     */
+    fun clearSPData(): Boolean = spDecoder.removeAllData()
+
+    /**
+     * 清空所有菜单文件数据（仅仅删除名为 *.menu 的文件）
+     */
+    fun clearMenuFiles() {
+        val files: Array<File>? = File(jsonDecoder.dataFolder).listFiles { file, name -> (name != null) && (name!!.endsWith(".menu", false)) }
+        files?.forEach { it.delete() }
+    }
+
+    /**
      * 储存菜单数据对象为文件对象，此操作会替换现有相同名称的菜单对象
      * @return  执行结果
      */
@@ -298,6 +311,13 @@ class DATAHelper(appContext: Context) {
         fun saveCount(menuTitle: String, count: Int): Boolean {
             val edit: SharedPreferences.Editor = PreferenceManager.getDefaultSharedPreferences(appContext).edit()
             return edit.putInt(menuTitle, count).commit()
+        }
+
+        /**
+         * 清除所有SP数据
+         */
+        fun removeAllData(): Boolean {
+            return PreferenceManager.getDefaultSharedPreferences(appContext).edit().clear().commit()
         }
 
     }
