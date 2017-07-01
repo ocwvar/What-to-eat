@@ -87,7 +87,7 @@ class ResultAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             val views: ResultItemViewHolder = holder as ResultItemViewHolder
             val resultObject: ResultItem = source[position] as ResultItem
 
-            views.owner.text = String.format("%s%s", views.itemView.context.getString(R.string.result_owner_header), resultObject.ownerTitle)
+            views.owner.text = String.format("%s %s", views.itemView.context.getString(R.string.result_owner_header), resultObject.ownerTitle)
             views.foodTitle.text = resultObject.food.title
             views.foodMessage.text = resultObject.food.message
 

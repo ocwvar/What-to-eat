@@ -39,8 +39,11 @@
     <string name="menu_list_subTitle_header">Menu Count:</string>
     <string name="result_message">O...OKey!</string>
     <string name="result_message_1">Eat those things!</string>
-    <string name="result_owner_header">This Result from:</string>
+    <string name="result_owner_header">From Menu:</string>
     <string name="result_waiting_text">Let me see……\n(´・ω・`)</string>
     <string name="simple_cancel">Cancel</string>
     <string name="simple_done">Done</string>
+    <string name="main_ERROR_no_permission">No necessary permission</string>
+    <string name="main_button_permission">Give</string>
+    <string name="menu_list_dialog_refresh_message">All menu data will be removed and reload from local data files!</string>
 </resources>

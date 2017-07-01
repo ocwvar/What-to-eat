@@ -80,6 +80,11 @@ class MenuManagerActivity : AppCompatActivity(), MenuListAdapter.Callback, View.
         }
     }
 
+    override fun onCreateOptionsMenu(menu: android.view.Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_menu_manager, menu)
+        return true
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
         //点击ActionBar上的返回按钮
@@ -89,6 +94,19 @@ class MenuManagerActivity : AppCompatActivity(), MenuListAdapter.Callback, View.
                 } else {
                     finish()
                 }
+            }
+        //重新从本地文件加载数据
+            R.id.menu_menu_manager_reload -> {
+                AlertDialog.Builder(this@MenuManagerActivity)
+                        .setMessage(R.string.menu_list_dialog_refresh_message)
+                        .setPositiveButton(R.string.simple_done, { p0, p1 ->
+                            DATAHelper(this@MenuManagerActivity).initData()
+                            adapter.notifyDataSetChanged()
+                            supportActionBar?.subtitle = String.format("%s%d", getString(R.string.menu_list_subTitle_header), DATA.menus.size)
+                            p0.dismiss()
+                        })
+                        .setNegativeButton(R.string.simple_cancel, { p0, p1 -> p0.dismiss() })
+                        .show()
             }
         }
         return true

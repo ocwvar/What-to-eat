@@ -8,6 +8,8 @@
     <!--主界面文字-->
     <string name="main_menus">菜单管理</string>
     <string name="main_ERROR_no_enabled_menus">当前没有已启用的菜单，无法生成结果</string>
+    <string name="main_ERROR_no_permission">当前APP没有必须的权限</string>
+    <string name="main_button_permission">申请</string>
 
     <!--Menu项目的文字-->
     <string name="item_menu_random">随机数量</string>
@@ -16,8 +18,10 @@
 
     <!--Menu列表页面文字-->
     <string name="menu_list_ERROR_dialog_option_number">随机数量不正确</string>
-    <string name="menu_list_name">@string/main_menus</string>
+    <string name="menu_list_name" translatable="false">@string/main_menus</string>
     <string name="menu_list_subTitle_header">菜单数量:</string>
+    <string name="menu_list_option_refresh">重新读取菜单</string>
+    <string name="menu_list_dialog_refresh_message">此操作将移除所有菜单数据，并从本地已储存的文件中重新读取数据！</string>
     <string name="menu_list_dialog_delete_title">是否删除此菜单？</string>
     <string name="menu_list_dialog_delete_yes">删除菜单</string>
     <string name="menu_list_dialog_delete_no">返回</string>
@@ -54,6 +58,6 @@
     <string name="result_waiting_text">我算算看啊……\n(´・ω・`)</string>
     <string name="result_message">决定了！</string>
     <string name="result_message_1">我们去吃这些！</string>
-    <string name="result_owner_header">此条结果来自菜单：</string>
+    <string name="result_owner_header">菜单：</string>
 
 </resources>

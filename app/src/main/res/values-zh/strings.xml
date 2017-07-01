@@ -39,8 +39,12 @@
     <string name="menu_list_subTitle_header">当前菜单数量：</string>
     <string name="result_message">决定了！</string>
     <string name="result_message_1">我们去吃这些！</string>
-    <string name="result_owner_header">此条结果来自菜单：</string>
-    <string name="result_waiting_text">我算算看啊…… (´・ω・`)</string>
+    <string name="result_owner_header">菜单：</string>
+    <string name="result_waiting_text">我算算看啊……\n(´・ω・`)</string>
     <string name="simple_cancel">取消</string>
     <string name="simple_done">确定</string>
+    <string name="main_ERROR_no_permission">当前APP没有必须的权限</string>
+    <string name="main_button_permission">申请</string>
+    <string name="menu_list_dialog_refresh_message">此操作将移除所有菜单数据，并从本地已储存的文件中重新读取数据！</string>
+    <string name="menu_list_option_refresh">Reload Menus</string>
 </resources>

@@ -1,11 +1,14 @@
 package com.ocwvar.whattoeat.Activities
 
+import android.Manifest
 import android.animation.Animator
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
+import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.util.Pair
 import android.support.v7.app.AppCompatActivity
@@ -18,6 +21,7 @@ import android.view.animation.AnimationUtils
 import com.ocwvar.darkpurple.Units.ToastMaker
 import com.ocwvar.whattoeat.R
 import com.ocwvar.whattoeat.Unit.DATA
+import kotlin.reflect.KProperty
 
 /**
  * Project Whattoeat
@@ -32,6 +36,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var mainPanel: View
     //动画执行标记，标记为True时，不接受控件点击事件和按键点击事件
     private var isShowingAnimation = false
+    //是否拥有文件读取权限标记
+    private var isHavePermission: Boolean by object : Any() {
+        operator fun getValue(thisRef: Any?, property: KProperty<*>): Boolean {
+            return Build.VERSION.SDK_INT <= 22 || this@MainActivity.checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+        }
+
+        operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Boolean) {}
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if (Build.VERSION.SDK_INT >= 21) {
@@ -68,14 +80,25 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         isShowingAnimation = true
                     }
                 })
+                it.duration = 1000L
                 it
             }
             mainPanel.startAnimation(fadeAnimation)
         }
+
+        //如果当前没有权限，则发起申请
+        if (!isHavePermission) {
+            val permissionBar: Snackbar = Snackbar.make(findViewById(android.R.id.content), R.string.main_ERROR_no_permission, Snackbar.LENGTH_INDEFINITE)
+            permissionBar.setAction(R.string.main_button_permission, {
+                requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 0)
+                permissionBar.dismiss()
+            })
+            permissionBar.show()
+        }
     }
 
     override fun onClick(view: View) {
-        if (isShowingAnimation) {
+        if (isShowingAnimation || !isHavePermission) {
             //当前正在执行动画，不接受控件点击事件反馈
             return
         }
@@ -192,6 +215,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     isShowingAnimation = true
                 }
             })
+            it.duration = 600L
             it
         }
 
