@@ -49,15 +49,13 @@ object ToastMaker {
             toastTextView = LayoutInflater.from(context).inflate(R.layout.toast_layout, null) as TextView
             layoutKeeper = WeakReference(toastTextView)
         }
-        toastTextView?.let {
-            it.text = message
-            it.setBackgroundColor(color)
+        toastTextView.text = message
+        toastTextView.setBackgroundColor(color)
 
-            val toast: Toast = Toast(context)
-            toast.view = it
-            toast.duration = Toast.LENGTH_SHORT
-            toast.show()
-        }
+        val toast: Toast = Toast(context)
+        toast.view = toastTextView
+        toast.duration = Toast.LENGTH_SHORT
+        toast.show()
     }
 
 }

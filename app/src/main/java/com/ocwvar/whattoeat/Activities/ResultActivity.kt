@@ -106,7 +106,7 @@ class ResultActivity : AppCompatActivity(), View.OnClickListener {
         //RecycleView属性设置
         (findViewById(R.id.recycleView) as RecyclerView).let {
             //RecycleView触摸事件，动态隐藏FAB
-            it.setOnTouchListener { view, motionEvent ->
+            it.setOnTouchListener { _, motionEvent ->
                 when (motionEvent.action) {
                     MotionEvent.ACTION_MOVE -> {
                         fab.hide()
@@ -170,7 +170,7 @@ class ResultActivity : AppCompatActivity(), View.OnClickListener {
                                     finish()
                                 }
                             })
-                            .setNegativeButton(R.string.result_dialog_not_save, { p0, p1 ->
+                            .setNegativeButton(R.string.result_dialog_not_save, { _, _ ->
                                 //不储存数据
                                 if (!isWaitingForResult) {
                                     if (Build.VERSION.SDK_INT >= 21) {

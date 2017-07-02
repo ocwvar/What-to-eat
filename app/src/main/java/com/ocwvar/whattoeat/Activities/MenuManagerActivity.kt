@@ -100,7 +100,7 @@ class MenuManagerActivity : AppCompatActivity(), MenuListAdapter.Callback, View.
             R.id.menu_menu_manager_reload -> {
                 AlertDialog.Builder(this@MenuManagerActivity)
                         .setMessage(R.string.menu_list_dialog_refresh_message)
-                        .setPositiveButton(R.string.simple_done, { p0, p1 ->
+                        .setPositiveButton(R.string.simple_done, { p0, _ ->
                             val dataHelper: DATAHelper = DATAHelper(this@MenuManagerActivity)
                             dataHelper.clearSPData()
                             dataHelper.initData()
@@ -108,7 +108,7 @@ class MenuManagerActivity : AppCompatActivity(), MenuListAdapter.Callback, View.
                             supportActionBar?.subtitle = String.format("%s%d", getString(R.string.menu_list_subTitle_header), DATA.menus.size)
                             p0.dismiss()
                         })
-                        .setNegativeButton(R.string.simple_cancel, { p0, p1 -> p0.dismiss() })
+                        .setNegativeButton(R.string.simple_cancel, { p0, _ -> p0.dismiss() })
                         .show()
             }
         }
@@ -153,7 +153,7 @@ class MenuManagerActivity : AppCompatActivity(), MenuListAdapter.Callback, View.
         //显示是否编辑菜单对话框
         AlertDialog.Builder(this@MenuManagerActivity)
                 .setMessage(R.string.menu_list_dialog_edit_title)
-                .setPositiveButton(R.string.menu_list_dialog_edit_edit, { p0, p1 ->
+                .setPositiveButton(R.string.menu_list_dialog_edit_edit, { p0, _ ->
                     p0.dismiss()
                     //启动菜单编辑页面进行菜单编辑操作
                     val animBundle: Bundle?
@@ -172,7 +172,7 @@ class MenuManagerActivity : AppCompatActivity(), MenuListAdapter.Callback, View.
                     intent.putExtra(MenuEditActivity.ACTIONS.EXTRAS_PARCELABLE_OBJECT, menu)
                     startActivity(intent, animBundle)
                 })
-                .setNegativeButton(R.string.menu_list_dialog_edit_option, { p0, p1 ->
+                .setNegativeButton(R.string.menu_list_dialog_edit_option, { p0, _ ->
                     p0.dismiss()
                     //显示属性修改对话框
                     OptionChangeDialog().show(position, menu)
@@ -184,12 +184,12 @@ class MenuManagerActivity : AppCompatActivity(), MenuListAdapter.Callback, View.
         //显示是否删除菜单对话框
         AlertDialog.Builder(this@MenuManagerActivity)
                 .setMessage(R.string.menu_list_dialog_delete_title)
-                .setPositiveButton(R.string.menu_list_dialog_delete_yes, { p0, p1 ->
+                .setPositiveButton(R.string.menu_list_dialog_delete_yes, { p0, _ ->
                     p0.dismiss()
                     DATAHelper(this@MenuManagerActivity).removeMenu(menu)
                     adapter.notifyItemRemoved(position)
                 })
-                .setNegativeButton(R.string.menu_list_dialog_delete_no, { p0, p1 ->
+                .setNegativeButton(R.string.menu_list_dialog_delete_no, { p0, _ ->
                     p0.dismiss()
                 })
                 .show()
@@ -228,7 +228,7 @@ class MenuManagerActivity : AppCompatActivity(), MenuListAdapter.Callback, View.
 
             AlertDialog.Builder(this@MenuManagerActivity)
                     .setView(dialogView)
-                    .setPositiveButton(R.string.simple_done, { p0, p1 ->
+                    .setPositiveButton(R.string.simple_done, { p0, _ ->
                         //获取用户输入的随机数量，发生异常则数量为 -1
                         var number: Int
                         try {

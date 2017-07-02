@@ -55,7 +55,7 @@ class DATAHelper(appContext: Context) {
      * 清空所有菜单文件数据（仅仅删除名为 *.menu 的文件）
      */
     fun clearMenuFiles() {
-        val files: Array<File>? = File(jsonDecoder.dataFolder).listFiles { file, name -> (name != null) && (name!!.endsWith(".menu", false)) }
+        val files: Array<File>? = File(jsonDecoder.dataFolder).listFiles { _, name -> (name != null) && (name!!.endsWith(".menu", false)) }
         files?.forEach { it.delete() }
     }
 
@@ -247,11 +247,11 @@ class DATAHelper(appContext: Context) {
             //菜单文件列表
             var menuFiles: Array<File>?
             if (isRecord) {
-                menuFiles = File(dataRecordFolder).listFiles { file, name ->
+                menuFiles = File(dataRecordFolder).listFiles { _, name ->
                     (name != null) && (name!!.endsWith(".menu", false))
                 }
             } else {
-                menuFiles = File(dataFolder).listFiles { file, name ->
+                menuFiles = File(dataFolder).listFiles { _, name ->
                     (name != null) && (name!!.endsWith(".menu", false))
                 }
             }

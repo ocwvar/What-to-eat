@@ -76,7 +76,7 @@ class RecordManagerActivity : AppCompatActivity(), RecordAdapter.CallBack {
         //长按记录项目，显示是否删除记录对话框
         AlertDialog.Builder(this@RecordManagerActivity)
                 .setMessage(R.string.record_dialog_deleting_title)
-                .setPositiveButton(R.string.record_dialog_deleting_yes, { p0, p1 ->
+                .setPositiveButton(R.string.record_dialog_deleting_yes, { p0, _ ->
                     if (DATAHelper(this@RecordManagerActivity).removeRecord(record.title)) {
                         ToastMaker.show(this@RecordManagerActivity, R.string.record_deleting_success, ToastMaker.TOAST_COLOR_NORMAL)
                         adapter.notifyItemRemoved(position)
@@ -85,7 +85,7 @@ class RecordManagerActivity : AppCompatActivity(), RecordAdapter.CallBack {
                     }
                     p0.dismiss()
                 })
-                .setNegativeButton(R.string.menu_list_dialog_delete_no, { p0, p1 -> p0.dismiss() })
+                .setNegativeButton(R.string.menu_list_dialog_delete_no, { p0, _ -> p0.dismiss() })
                 .show()
     }
 

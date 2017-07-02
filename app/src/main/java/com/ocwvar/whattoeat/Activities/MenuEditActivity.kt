@@ -314,11 +314,11 @@ class MenuEditActivity : AppCompatActivity(), FoodListAdapter.Callback, View.OnC
                 //点击返回时，显示保存确认对话框
                 AlertDialog.Builder(this@MenuEditActivity)
                         .setMessage(R.string.menu_edit_dialog_exit_title)
-                        .setNegativeButton(R.string.menu_edit_dialog_exit_unSave, { p0, p1 ->
+                        .setNegativeButton(R.string.menu_edit_dialog_exit_unSave, { p0, _ ->
                             p0.dismiss()
                             finish()
                         })
-                        .setPositiveButton(R.string.menu_edit_dialog_exit_save, { p0, p1 ->
+                        .setPositiveButton(R.string.menu_edit_dialog_exit_save, { p0, _ ->
                             p0.dismiss()
                             exitPage(exitAction)
                         })
@@ -391,11 +391,11 @@ class MenuEditActivity : AppCompatActivity(), FoodListAdapter.Callback, View.OnC
             //点击返回时，显示保存确认对话框
             AlertDialog.Builder(this@MenuEditActivity)
                     .setMessage(R.string.menu_edit_dialog_exit_title)
-                    .setNegativeButton(R.string.menu_edit_dialog_exit_unSave, { p0, p1 ->
+                    .setNegativeButton(R.string.menu_edit_dialog_exit_unSave, { p0, _ ->
                         p0.dismiss()
                         finish()
                     })
-                    .setPositiveButton(R.string.menu_edit_dialog_exit_save, { p0, p1 ->
+                    .setPositiveButton(R.string.menu_edit_dialog_exit_save, { p0, _ ->
                         p0.dismiss()
                         exitPage(exitAction)
                     })
@@ -434,7 +434,7 @@ class MenuEditActivity : AppCompatActivity(), FoodListAdapter.Callback, View.OnC
             //显示对话框
             AlertDialog.Builder(this@MenuEditActivity)
                     .setView(dialogView)
-                    .setPositiveButton(R.string.simple_done) { p0, p1 ->
+                    .setPositiveButton(R.string.simple_done) { p0, _ ->
                         //确定按钮，进行食品添加
                         val title: String? = titleInput.text.toString()
                         val message: String? = messageInput.text.toString()

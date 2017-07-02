@@ -12,16 +12,10 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
     signingConfigs {
         release {
             try {
-                storeFile file(project.hasProperty("KEY_FILE") ? KEY_PATH : System.getenv("KEY_ONLINE_PATH"))
+                storeFile file(project.hasProperty("KEY_FILE") ? KEY_FILE : System.getenv("KEY_ONLINE_PATH"))
                 storePassword project.hasProperty("KAY_PASSWORD") ? KAY_PASSWORD : System.getenv("KAY_PASSWORD")
                 keyAlias project.hasProperty("KEY_ALIAS") ? KEY_ALIAS : System.getenv("KEY_ALIAS")
                 keyPassword project.hasProperty("KEY_ALIAS_PASSWORD") ? KEY_ALIAS_PASSWORD : System.getenv("KEY_ALIAS_PASSWORD")
@@ -34,11 +28,25 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
             debuggable false
             jniDebuggable false
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    dexOptions {
+        incremental true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
     }
 }
 

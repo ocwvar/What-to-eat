@@ -14,7 +14,7 @@ licenses:
 - google-gdk-license-.+
 before_install:
 - openssl aes-256-cbc -K $encrypted_322171c2df06_key -iv $encrypted_322171c2df06_iv
-  -in OCWVAR_KEY.jks.enc -out OCWVAR_KEY.jks -d
+  -in ocwvar_keystore.jks.enc -out ocwvar_keystore.jks -d
 - chmod +x gradlew
 after_success:
 - sh set_tags.sh
@@ -24,4 +24,5 @@ deploy:
     secure: VwHx11L7UZsUlH7v4nXFX8NZfTTN9IMADMhsNJys9q0X63SWCO9mCrJZZHoRsS8urPVpuZFZTQy5+Pi7zVgOOU5dvwjAuiMfJvtX+mV1swctv/fQaWQJMDtvRnn38MedpcYc2CCUtlbHbohyZNHYXTSgubOpNelqYpamyZgrkRPL4KDPrVfICNrZrEU4sVUB/esrZRu5lORUGpYXkfQvoz6koofFENqcqkwcvohZBsb15kKZy0Gyo0xM6N7b9vROIReK9piZnaQp730930BUkrIC7o1WAhJdEk0zJYn9jrcpMJHdR42msWQ8oFYX85uvNw20i1XeWK5hPLFJ7FWQCmYJaDtu/7Wnj/CDCuHvGJjXQpCq+2XZCm8tJy2XpmW0RgdVkSeo8jCAeTc8EFqstajEjt3YCpDXLjnwjYQJP8yZJX+6O8OJpMeL6mlAn3fuBzOTyurkXpIQxeCvktrJBBIXgrApvfMSuyXeObLaxiqt6iCHf+4H5P0zGdfJ5Yms+x20isvXK39+l9M4AX4VIP8hCp4nT7fAqgsZmNYuWkfEOyA7l9yQCaRuO8lxuukHTUqfMWzSsbgnuqyx+g5nh8guFSU1btyc8IXAA+Djki2l1NH8/8drXbBQSUQWPHnV8EmTkSxAc+4EQXHMEN+i6JtI4qsR1+Fsm7pYeagfFWw=
   file: app/build/outputs/apk/app-release.apk
   on:
+    tags: true
     repo: ocwvar/What-to-eat
