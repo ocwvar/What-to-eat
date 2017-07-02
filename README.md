@@ -1,5 +1,10 @@
 
-# 吃啥.What2Eat
+# 吃啥.What2Eat 
+
+![](https://travis-ci.org/ocwvar/What-to-eat.svg?branch=master)
+
+支持系统 Android KK 至 Android O
+----
 
 #### 专门设计给对于等下吃啥、今晚吃啥、该买点啥…… 等选择困难户的APP！
 #### 使用者只需要以两个步骤即可脱离选择地狱！！
