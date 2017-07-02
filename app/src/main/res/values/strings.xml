@@ -72,5 +72,7 @@
     <string name="record_dialog_deleting_no" translatable="false">@string/simple_cancel</string>
     <string name="record_deleting_success">成功删除记录</string>
     <string name="record_deleting_fail">记录删除失败，或文件不存在</string>
+    <string name="main_about_me">应用作者：OCWVAR\n項目地址：https://github.com/ocwvar\n若您喜欢可以在项目下点个星星哟 :D</string>
+    <string name="main_about_switch_umeng">启用友盟统计和错误反馈(重启生效)\n如果您手动打开应用的"电话"权限，将发送更详细的报告</string>
 
 </resources>

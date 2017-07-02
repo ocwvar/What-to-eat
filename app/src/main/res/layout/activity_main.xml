@@ -55,4 +55,13 @@
 
     </LinearLayout>
 
+    <ImageButton
+        android:id="@+id/main_about"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|bottom"
+        android:background="@null"
+        android:padding="10dp"
+        android:src="@drawable/ic_action_about" />
+
 </FrameLayout>

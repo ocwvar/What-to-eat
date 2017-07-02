@@ -19,6 +19,7 @@ import com.ocwvar.darkpurple.Units.ToastMaker
 import com.ocwvar.whattoeat.Adapter.ResultAdapter
 import com.ocwvar.whattoeat.R
 import com.ocwvar.whattoeat.Unit.*
+import com.umeng.analytics.MobclickAgent
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -190,6 +191,16 @@ class ResultActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        MobclickAgent.onResume(this@ResultActivity)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        MobclickAgent.onPause(this@ResultActivity)
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {

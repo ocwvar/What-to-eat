@@ -7,20 +7,21 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.annotation.RequiresApi
 import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.util.Pair
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
-import android.view.KeyEvent
-import android.view.View
-import android.view.ViewAnimationUtils
-import android.view.WindowManager
+import android.view.*
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.CheckBox
 import com.ocwvar.darkpurple.Units.ToastMaker
 import com.ocwvar.whattoeat.R
 import com.ocwvar.whattoeat.Unit.DATA
+import com.umeng.analytics.MobclickAgent
 import kotlin.reflect.KProperty
 
 /**
@@ -59,12 +60,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_main)
         mainPanel = findViewById(R.id.mainPanel)
         findViewById(R.id.fab).setOnClickListener(this@MainActivity)
+        findViewById(R.id.main_about).setOnClickListener(this@MainActivity)
         findViewById(R.id.main_menu_manager).setOnClickListener(this@MainActivity)
         findViewById(R.id.main_record_manager).setOnClickListener(this@MainActivity)
     }
 
     override fun onResume() {
         super.onResume()
+        MobclickAgent.onResume(this@MainActivity)
         if (mainPanel.visibility == View.VISIBLE) {
             //如果页面恢复的时候，背景已经展开，则要使其淡去
             val fadeAnimation: Animation = AnimationUtils.loadAnimation(this@MainActivity, R.anim.fade_out).let {
@@ -98,6 +101,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        MobclickAgent.onPause(this@MainActivity)
+    }
+
     override fun onClick(view: View) {
         if (isShowingAnimation || !isHavePermission) {
             //当前正在执行动画，不接受控件点击事件反馈
@@ -105,8 +113,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         when (view.id) {
+        //点击中央按钮
             R.id.fab -> {
-                //点击中央按钮
                 //先判断是否有已启用的菜单
                 if (DATA.enabledMenus().size <= 0) {
                     //没有启用菜单
@@ -122,8 +130,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
 
+        //启动菜单编辑页面进行菜单编辑操作
             R.id.main_menu_manager -> {
-                //启动菜单编辑页面进行菜单编辑操作
                 val animBundle: Bundle?
                 if (Build.VERSION.SDK_INT >= 21) {
                     animBundle = ActivityOptionsCompat.makeSceneTransitionAnimation(
@@ -137,8 +145,25 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 startActivity(Intent(this@MainActivity, MenuManagerActivity::class.java), animBundle)
             }
 
+        //启动记录管理页面
             R.id.main_record_manager -> {
                 startActivity(Intent(this@MainActivity, RecordManagerActivity::class.java))
+            }
+
+        //打开关于对话框
+            R.id.main_about -> {
+                val dialogView: View = LayoutInflater.from(this@MainActivity).inflate(R.layout.dialog_about, null, false)
+                val isEnableUmeng: CheckBox = dialogView.findViewById<CheckBox>(R.id.isEnableUmeng).let {
+                    it.isChecked = PreferenceManager.getDefaultSharedPreferences(this@MainActivity).getBoolean("isEnableUmeng", true)
+                    it
+                }
+                AlertDialog.Builder(this@MainActivity)
+                        .setView(dialogView)
+                        .setPositiveButton(R.string.simple_done, { p0, _ ->
+                            PreferenceManager.getDefaultSharedPreferences(this@MainActivity).edit().putBoolean("isEnableUmeng", isEnableUmeng.isChecked).commit()
+                            p0.dismiss()
+                        })
+                        .show()
             }
         }
     }

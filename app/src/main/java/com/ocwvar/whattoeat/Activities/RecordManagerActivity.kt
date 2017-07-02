@@ -13,6 +13,7 @@ import com.ocwvar.whattoeat.Adapter.RecordAdapter
 import com.ocwvar.whattoeat.R
 import com.ocwvar.whattoeat.Unit.DATAHelper
 import com.ocwvar.whattoeat.Unit.Menu
+import com.umeng.analytics.MobclickAgent
 
 /**
  * Project Whattoeat
@@ -59,6 +60,16 @@ class RecordManagerActivity : AppCompatActivity(), RecordAdapter.CallBack {
             }
         }
         return true
+    }
+
+    override fun onResume() {
+        super.onResume()
+        MobclickAgent.onResume(this@RecordManagerActivity)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        MobclickAgent.onPause(this@RecordManagerActivity)
     }
 
     override fun onLongClick(record: Menu, position: Int) {

@@ -56,5 +56,7 @@
     <string name="result_dialog_input_hit">输入记录名称</string>
     <string name="result_dialog_not_save">不保存</string>
     <string name="result_dialog_save">保存记录</string>
+    <string name="main_about_me">应用作者：OCWVAR\n項目地址：https://github.com/ocwvar\n若您喜欢可以在项目下点个星星哟 :D</string>
     <string name="result_record_default_name_header">记录 编号:</string>
+    <string name="main_about_switch_umeng">启用友盟统计和错误反馈(重启生效)\n如果您手动打开应用的"电话"权限，将发送更详细的报告</string>
 </resources>

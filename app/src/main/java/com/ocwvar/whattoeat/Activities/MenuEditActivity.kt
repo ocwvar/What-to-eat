@@ -22,6 +22,7 @@ import com.ocwvar.whattoeat.Unit.DATA
 import com.ocwvar.whattoeat.Unit.DATAHelper
 import com.ocwvar.whattoeat.Unit.Food
 import com.ocwvar.whattoeat.Unit.Menu
+import com.umeng.analytics.MobclickAgent
 import java.util.*
 
 /**
@@ -290,6 +291,16 @@ class MenuEditActivity : AppCompatActivity(), FoodListAdapter.Callback, View.OnC
     override fun onCreateOptionsMenu(menu: android.view.Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_menu_edit, menu)
         return true
+    }
+
+    override fun onResume() {
+        super.onResume()
+        MobclickAgent.onResume(this@MenuEditActivity)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        MobclickAgent.onPause(this@MenuEditActivity)
     }
 
     /**

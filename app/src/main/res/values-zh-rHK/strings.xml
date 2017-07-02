@@ -57,4 +57,6 @@
     <string name="simple_cancel">取消</string>
     <string name="simple_done">確認</string>
     <string name="app_name">食乜</string>
+    <string name="main_about_me">程式作者：OCWVAR\n項目地址：https://github.com/ocwvar\n如果你鍾意我呢只APP，請在項目裏點下Star啦 :D</string>
+    <string name="main_about_switch_umeng">啓用友盟統計同埋錯誤數據反饋(重啓生效)\n可以通過手動打開程式"電話權限"發送更詳細嘅日志</string>
 </resources>

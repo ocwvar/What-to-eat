@@ -56,5 +56,7 @@
     <string name="result_dialog_input_hit">Input record name</string>
     <string name="result_dialog_not_save">Not save</string>
     <string name="result_dialog_save">Save record</string>
+    <string name="main_about_me">This app made by OCWVAR\nProject source code：https://github.com/ocwvar\nIf you enjoy this app,you can click the "star" button :D</string>
     <string name="result_record_default_name_header">Record No.</string>
+    <string name="main_about_switch_umeng">Enable Umeng plugin (Need restart)\nSend more detail by enabling "Phone Permission" Manually</string>
 </resources>

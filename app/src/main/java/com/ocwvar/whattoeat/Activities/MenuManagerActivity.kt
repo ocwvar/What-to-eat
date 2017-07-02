@@ -24,6 +24,7 @@ import com.ocwvar.whattoeat.R
 import com.ocwvar.whattoeat.Unit.DATA
 import com.ocwvar.whattoeat.Unit.DATAHelper
 import com.ocwvar.whattoeat.Unit.Menu
+import com.umeng.analytics.MobclickAgent
 
 /**
  * Project Whattoeat
@@ -138,8 +139,14 @@ class MenuManagerActivity : AppCompatActivity(), MenuListAdapter.Callback, View.
 
     override fun onResume() {
         super.onResume()
+        MobclickAgent.onResume(this@MenuManagerActivity)
         adapter.notifyDataSetChanged()
         supportActionBar?.subtitle = String.format("%s%d", getString(R.string.menu_list_subTitle_header), DATA.menus.size)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        MobclickAgent.onPause(this@MenuManagerActivity)
     }
 
     override fun onClick(menu: Menu, position: Int, itemView: View) {
