@@ -1,5 +1,11 @@
 
-# 吃啥.What2Eat
+# 吃啥.What2Eat 
+
+![](https://travis-ci.org/ocwvar/What-to-eat.svg?branch=master)
+
+支持系统 Android KK 至 Android O
+
+----
 
 #### 专门设计给对于等下吃啥、今晚吃啥、该买点啥…… 等选择困难户的APP！
 #### 使用者只需要以两个步骤即可脱离选择地狱！！
@@ -9,11 +15,10 @@
 
 APP会从你 已启用的菜单 中按照 指定随机数量 来获取结果！
 ----
-目前只支持 **中文** **香港繁体** 和 **英文(菜鸡翻译)**
+目前只支持 **中文** **香港繁体粤语** 和 **英文(菜鸡翻译)**
 
 数据统计插件使用 **友盟数据统计** 可在主界面最下角关于对话框中停用
 
-截图：
 ![](https://github.com/ocwvar/What-to-eat/blob/master/screenshots/main.png)
 ![](https://github.com/ocwvar/What-to-eat/blob/master/screenshots/result.png)
 ![](https://github.com/ocwvar/What-to-eat/blob/master/screenshots/menu.png)
