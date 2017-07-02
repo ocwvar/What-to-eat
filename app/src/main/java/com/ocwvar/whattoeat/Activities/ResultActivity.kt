@@ -152,7 +152,7 @@ class ResultActivity : AppCompatActivity(), View.OnClickListener {
                     //创建并显示询问对话框
                     AlertDialog.Builder(this@ResultActivity)
                             .setView(editText)
-                            .setPositiveButton(R.string.result_dialog_save, { p0, p1 ->
+                            .setPositiveButton(R.string.result_dialog_save, { p0, _ ->
                                 //确认储存
                                 var recordName: String = editText.text.toString()
                                 if (TextUtils.isEmpty(recordName) || !isNameValid(recordName)) {

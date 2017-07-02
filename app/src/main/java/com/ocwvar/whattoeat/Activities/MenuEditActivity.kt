@@ -363,7 +363,7 @@ class MenuEditActivity : AppCompatActivity(), FoodListAdapter.Callback, View.OnC
                 }
                 AlertDialog.Builder(this@MenuEditActivity)
                         .setView(editText)
-                        .setPositiveButton(R.string.simple_done, { p0, p1 ->
+                        .setPositiveButton(R.string.simple_done, { p0, _ ->
                             menuMessageInput.text = editText.text.toString()
                             oldMessage = editText.text.toString()
                             p0.cancel()

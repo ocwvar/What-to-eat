@@ -63,7 +63,7 @@ class MenuManagerActivity : AppCompatActivity(), MenuListAdapter.Callback, View.
 
         //RecycleView属性设置
         (findViewById(R.id.recycleView) as RecyclerView).let {
-            it.setOnTouchListener { view, motionEvent ->
+            it.setOnTouchListener { _, motionEvent ->
                 //滑动列表时隐藏FAB，抬起手指重新显示
                 when (motionEvent.action) {
                     MotionEvent.ACTION_MOVE -> {
