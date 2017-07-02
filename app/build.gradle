@@ -18,6 +18,28 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    signingConfigs {
+        release {
+            try {
+                storeFile file(project.hasProperty("KEY_FILE") ? KEY_PATH : System.getenv("KEY_ONLINE_PATH"))
+                storePassword project.hasProperty("KAY_PASSWORD") ? KAY_PASSWORD : System.getenv("KAY_PASSWORD")
+                keyAlias project.hasProperty("KEY_ALIAS") ? KEY_ALIAS : System.getenv("KEY_ALIAS")
+                keyPassword project.hasProperty("KEY_ALIAS_PASSWORD") ? KEY_ALIAS_PASSWORD : System.getenv("KEY_ALIAS_PASSWORD")
+            }
+            catch (ex) {
+                println "YOU DID NOT DEFINE THE INFORMATION OF SIGNING"
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            debuggable false
+            jniDebuggable false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
 }
 
 dependencies {
