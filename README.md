@@ -7,6 +7,8 @@
 
 可以从 Release 页面直接下载最新编译版本 :D
 
+[<img src="https://play.google.com/intl/en_us/badges/images/badge_new.png">](https://play.google.com/store/apps/details?id=com.ocwvar.whattoeat)
+
 ----
 
 #### 专门设计给对于等下吃啥、今晚吃啥、该买点啥…… 等选择困难户的APP！
